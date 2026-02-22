@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dog Dad Boarding — Premium Care for Your Best Friend</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="nav__container">
+      <a href="#home" class="nav__logo">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z" fill="currentColor" opacity="0"/>
+          <ellipse cx="7" cy="8" rx="2" ry="3" fill="currentColor"/>
+          <ellipse cx="17" cy="8" rx="2" ry="3" fill="currentColor"/>
+          <ellipse cx="12" cy="5" rx="2" ry="2.5" fill="currentColor"/>
+          <path d="M5 13c0 3.87 3.13 7 7 7s7-3.13 7-7c0-1.5-.5-2.5-1.5-3.5C16.5 8.5 14.5 8 12 8s-4.5.5-5.5 1.5C5.5 10.5 5 11.5 5 13z" fill="currentColor"/>
+        </svg>
+        Dog Dad
+      </a>
+      <ul class="nav__links" id="navLinks" role="list">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#contact" class="nav__cta">Book Now</a></li>
+      </ul>
+      <button class="nav__hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div class="nav__overlay" id="navOverlay"></div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="hero__bg">
+      <img
+        src="https://placehold.co/1600x900/2D6A4F/FFFFFF?text=Hero+Image+—+Replace+With+Real+Photo"
+        alt="Happy dogs at Dog Dad Boarding"
+        class="hero__img"
+      >
+    </div>
+    <div class="hero__content">
+      <div class="hero__badge">★ Rated #1 Pet Boarding in [City Name]</div>
+      <h1 class="hero__title">
+        Your Dog's<br>
+        <em>Home Away<br>From Home</em>
+      </h1>
+      <p class="hero__subtitle">
+        Premium boarding, daycare, and grooming where your furry family member gets the love and care they deserve.
+      </p>
+      <div class="hero__actions">
+        <a href="#contact" class="btn btn--primary">Book a Stay</a>
+        <a href="#services" class="btn btn--ghost">Explore Services</a>
+      </div>
+      <div class="hero__trust">
+        <div class="trust-badge">
+          <strong>500+</strong>
+          <span>Happy Dogs</span>
+        </div>
+        <div class="trust-badge">
+          <strong>5★</strong>
+          <span>Average Rating</span>
+        </div>
+        <div class="trust-badge">
+          <strong>5yr</strong>
+          <span>Experience</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">What We Offer</p>
+        <h2 class="section-title">Everything Your Dog Needs</h2>
+        <p class="section-subtitle">From overnight stays to daily adventures, we've got your pup covered.</p>
+      </div>
+      <div class="services__grid">
+        <div class="service-card">
+          <div class="service-card__icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </div>
+          <h3>Overnight Boarding</h3>
+          <p>Your dog sleeps in a cozy, private space with plenty of love and attention throughout the night. Just like home, but with new friends.</p>
+          <a href="#pricing" class="service-card__link">View Pricing →</a>
+        </div>
+        <div class="service-card">
+          <div class="service-card__icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <h3>Doggy Daycare</h3>
+          <p>A full day of supervised play, socialization, and enrichment activities with other friendly dogs. Worn-out pup guaranteed.</p>
+          <a href="#pricing" class="service-card__link">View Pricing →</a>
+        </div>
+        <div class="service-card">
+          <div class="service-card__icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+            </svg>
+          </div>
+          <h3>Grooming</h3>
+          <p>Bath, blow dry, brush out, nail trim, and more — your pup will leave looking and smelling like the star they truly are.</p>
+          <a href="#pricing" class="service-card__link">View Pricing →</a>
+        </div>
+        <div class="service-card">
+          <div class="service-card__icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="5" r="3"/><path d="M12 8v13M9 21h6M6 10l6-2 6 2"/>
+            </svg>
+          </div>
+          <h3>Dog Walking</h3>
+          <p>30 or 60 minute walks with GPS tracking and a post-walk report card — complete with photos — sent straight to your phone.</p>
+          <a href="#pricing" class="service-card__link">View Pricing →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="about" id="about">
+    <div class="container about__container">
+      <div class="about__image">
+        <img
+          src="https://placehold.co/600x700/40916C/FFFFFF?text=Owner+Photo+—+Replace+With+Real+Photo"
+          alt="Dog Dad owner with their dogs"
+        >
+        <div class="about__image-badge">
+          <strong>5+</strong>
+          <span>Years of<br>Loving Dogs</span>
+        </div>
+      </div>
+      <div class="about__content">
+        <p class="section-eyebrow">About Us</p>
+        <h2 class="section-title">We Treat Your Dog<br>Like Our Own</h2>
+        <p>Hi, I'm [Owner Name] — a lifelong dog lover and the proud founder of Dog Dad Boarding. What started as a passion project has grown into [City]'s most trusted pet care service.</p>
+        <p>Every dog that comes through our doors gets individual attention, lots of playtime, and all the belly rubs they want. We keep group sizes small so your pup never feels overwhelmed.</p>
+        <ul class="about__features">
+          <li>
+            <div class="feature-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div>
+              <strong>Licensed &amp; Insured</strong>
+              <p>Fully certified in pet first aid and CPR</p>
+            </div>
+          </li>
+          <li>
+            <div class="feature-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div>
+              <strong>Small Group Sizes</strong>
+              <p>Maximum 8 dogs at a time for personalized care</p>
+            </div>
+          </li>
+          <li>
+            <div class="feature-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div>
+              <strong>Daily Updates</strong>
+              <p>Photos and videos sent to you every single day</p>
+            </div>
+          </li>
+          <li>
+            <div class="feature-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div>
+              <strong>Vet Partnership</strong>
+              <p>24/7 emergency veterinary support on call</p>
+            </div>
+          </li>
+        </ul>
+        <a href="#contact" class="btn btn--primary">Get In Touch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section class="gallery" id="gallery">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Gallery</p>
+        <h2 class="section-title">Life at Dog Dad</h2>
+        <p class="section-subtitle">A peek into daily life — replace these with your real photos.</p>
+      </div>
+      <div class="gallery__grid">
+        <div class="gallery__item gallery__item--wide">
+          <img src="https://placehold.co/800x450/52B788/FFFFFF?text=Photo+1+—+Dogs+Playing" alt="Dogs playing together">
+        </div>
+        <div class="gallery__item">
+          <img src="https://placehold.co/400x400/74C69D/FFFFFF?text=Photo+2" alt="Dog resting">
+        </div>
+        <div class="gallery__item">
+          <img src="https://placehold.co/400x400/95D5B2/FFFFFF?text=Photo+3" alt="Dog on a walk">
+        </div>
+        <div class="gallery__item">
+          <img src="https://placehold.co/400x400/B7E4C7/1B4332?text=Photo+4" alt="Grooming session">
+        </div>
+        <div class="gallery__item">
+          <img src="https://placehold.co/400x400/52B788/FFFFFF?text=Photo+5" alt="Happy dog">
+        </div>
+        <div class="gallery__item gallery__item--wide">
+          <img src="https://placehold.co/800x450/40916C/FFFFFF?text=Photo+6+—+Group+Play+Time" alt="Dogs enjoying group play time">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Testimonials</p>
+        <h2 class="section-title">What Dog Parents Say</h2>
+      </div>
+      <div class="testimonials__grid">
+        <div class="testimonial-card">
+          <div class="testimonial-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <p>"[Owner Name] is absolutely incredible with dogs. Our golden retriever, Biscuit, is always so excited to come here. We get daily photos and come home to a happy, tired pup. Couldn't recommend more!"</p>
+          <div class="testimonial-card__author">
+            <img src="https://placehold.co/48x48/D8F3DC/1B4332?text=SJ" alt="Sarah J.">
+            <div>
+              <strong>Sarah J.</strong>
+              <span>Biscuit's Mom</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <p>"We've tried several boarding options but Dog Dad is on a completely different level. The personalized care, the daily updates, the obvious love for our dog — we're customers for life."</p>
+          <div class="testimonial-card__author">
+            <img src="https://placehold.co/48x48/D8F3DC/1B4332?text=MR" alt="Mike R.">
+            <div>
+              <strong>Mike R.</strong>
+              <span>Max's Dad</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <p>"I was nervous leaving my anxious rescue for the first time, but [Owner Name] was patient, communicative, and sent so many reassuring photos. Luna actually seemed sad to leave!"</p>
+          <div class="testimonial-card__author">
+            <img src="https://placehold.co/48x48/D8F3DC/1B4332?text=EK" alt="Emily K.">
+            <div>
+              <strong>Emily K.</strong>
+              <span>Luna's Mom</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Pricing</p>
+        <h2 class="section-title">Simple, Transparent Pricing</h2>
+        <p class="section-subtitle">No hidden fees. No surprises. Just great care.</p>
+      </div>
+      <div class="pricing__grid">
+        <div class="pricing-card">
+          <div class="pricing-card__header">
+            <h3>Daycare</h3>
+            <div class="pricing-card__price">
+              <span class="price-amount">$XX</span>
+              <span class="price-period">/ day</span>
+            </div>
+          </div>
+          <ul class="pricing-card__features">
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Full day of supervised play
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Feeding per your schedule
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Daily photo update
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Group &amp; solo play time
+            </li>
+          </ul>
+          <a href="#contact" class="btn btn--outline">Book Daycare</a>
+        </div>
+
+        <div class="pricing-card pricing-card--featured">
+          <div class="pricing-card__badge">Most Popular</div>
+          <div class="pricing-card__header">
+            <h3>Overnight Boarding</h3>
+            <div class="pricing-card__price">
+              <span class="price-amount">$XX</span>
+              <span class="price-period">/ night</span>
+            </div>
+          </div>
+          <ul class="pricing-card__features">
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Everything in Daycare
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Private sleeping space
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Morning &amp; evening walks
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Bedtime cuddles
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Pickup &amp; drop-off available
+            </li>
+          </ul>
+          <a href="#contact" class="btn btn--primary">Book Boarding</a>
+        </div>
+
+        <div class="pricing-card">
+          <div class="pricing-card__header">
+            <h3>Grooming</h3>
+            <div class="pricing-card__price">
+              <span class="price-amount">$XX+</span>
+              <span class="price-period">/ session</span>
+            </div>
+          </div>
+          <ul class="pricing-card__features">
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Bath &amp; blow dry
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Brush out
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Nail trim &amp; file
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Ear cleaning
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Bandana or bow finish
+            </li>
+          </ul>
+          <a href="#contact" class="btn btn--outline">Book Grooming</a>
+        </div>
+      </div>
+      <p class="pricing__note">Prices vary by dog size and breed. <a href="#contact">Contact us</a> for a personalized quote.</p>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact" id="contact">
+    <div class="container contact__container">
+      <div class="contact__info">
+        <p class="section-eyebrow">Get In Touch</p>
+        <h2 class="section-title">Ready to Book?</h2>
+        <p>Fill out the form and we'll get back to you within 24 hours to confirm availability and chat about your dog's needs.</p>
+        <ul class="contact__details">
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            [Your Street Address], [City], [State]
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+            [(555) 000-0000]
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            hello@dogdadboarding.com
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Mon – Sun: 7:00am – 8:00pm
+          </li>
+        </ul>
+        <div class="contact__social">
+          <a href="#" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            Instagram
+          </a>
+          <a href="#" aria-label="Facebook">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            Facebook
+          </a>
+          <a href="#" aria-label="TikTok">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.14 8.14 0 004.77 1.52V6.76a4.85 4.85 0 01-1-.07z"/></svg>
+            TikTok
+          </a>
+        </div>
+      </div>
+
+      <form class="contact__form" id="contactForm" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" placeholder="Jane Smith" required autocomplete="name">
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="jane@example.com" required autocomplete="email">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="(555) 000-0000" autocomplete="tel">
+          </div>
+          <div class="form-group">
+            <label for="service">Service Needed</label>
+            <select id="service" name="service">
+              <option value="">Select a service…</option>
+              <option value="boarding">Overnight Boarding</option>
+              <option value="daycare">Doggy Daycare</option>
+              <option value="grooming">Grooming</option>
+              <option value="walking">Dog Walking</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="start">Start Date</label>
+            <input type="date" id="start" name="start">
+          </div>
+          <div class="form-group">
+            <label for="end">End Date</label>
+            <input type="date" id="end" name="end">
+          </div>
+        </div>
+        <div class="form-group form-group--full">
+          <label for="message">Tell Us About Your Dog</label>
+          <textarea id="message" name="message" rows="4" placeholder="Breed, age, any special needs or personality quirks we should know about…"></textarea>
+        </div>
+        <button type="submit" class="btn btn--primary btn--full">Send Booking Request</button>
+        <p class="form-note">We'll respond within 24 hours. No spam, ever.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer__container">
+      <div class="footer__brand">
+        <a href="#home" class="nav__logo footer__logo">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <ellipse cx="7" cy="8" rx="2" ry="3"/>
+            <ellipse cx="17" cy="8" rx="2" ry="3"/>
+            <ellipse cx="12" cy="5" rx="2" ry="2.5"/>
+            <path d="M5 13c0 3.87 3.13 7 7 7s7-3.13 7-7c0-1.5-.5-2.5-1.5-3.5C16.5 8.5 14.5 8 12 8s-4.5.5-5.5 1.5C5.5 10.5 5 11.5 5 13z"/>
+          </svg>
+          Dog Dad
+        </a>
+        <p>Premium dog boarding, daycare, and grooming in [City]. Because your dog deserves the best.</p>
+      </div>
+      <div class="footer__links">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Overnight Boarding</a></li>
+          <li><a href="#services">Doggy Daycare</a></li>
+          <li><a href="#services">Grooming</a></li>
+          <li><a href="#services">Dog Walking</a></li>
+        </ul>
+      </div>
+      <div class="footer__links">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#testimonials">Reviews</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer__contact">
+        <h4>Contact</h4>
+        <p>[Your Street Address]<br>[City], [State] [ZIP]</p>
+        <p>[(555) 000-0000]</p>
+        <p>hello@dogdadboarding.com</p>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div class="container footer__bottom-inner">
+        <p>© 2025 Dog Dad Boarding. All rights reserved.</p>
+        <div class="footer__legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
