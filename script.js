@@ -15,10 +15,17 @@
 
   const backToTop = document.getElementById('backToTop');
 
-  // Add "scrolled" class when user scrolls past 60px
+  // Add "scrolled" class when user scrolls past 60px (rAF-throttled)
+  var ticking = false;
   function onScroll() {
-    nav.classList.toggle('scrolled', window.scrollY > 60);
-    if (backToTop) backToTop.classList.toggle('visible', window.scrollY > 500);
+    if (!ticking) {
+      requestAnimationFrame(function () {
+        nav.classList.toggle('scrolled', window.scrollY > 60);
+        if (backToTop) backToTop.classList.toggle('visible', window.scrollY > 500);
+        ticking = false;
+      });
+      ticking = true;
+    }
   }
 
   window.addEventListener('scroll', onScroll, { passive: true });
@@ -201,7 +208,7 @@
   function setFormStatus(message, type) {
     if (!formStatus) return;
     formStatus.textContent = message;
-    formStatus.className = 'form-status form-status--' + type;
+    formStatus.className = 'form-status' + (type ? ' form-status--' + type : '');
   }
 
   /* Field validation helpers */
@@ -211,7 +218,7 @@
       message: 'Please enter your name.'
     },
     email: {
-      validate: function (val) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val); },
+      validate: function (val) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val.trim()); },
       message: 'Please enter a valid email address.'
     },
     phone: {

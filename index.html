@@ -15,6 +15,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+  <link rel="dns-prefetch" href="https://placehold.co">
+  <link rel="preconnect" href="https://placehold.co">
+  <link rel="preload" as="image" href="https://placehold.co/1600x900/2D6A4F/FFFFFF?text=Hero+Image+—+Replace+With+Real+Photo">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -58,6 +61,7 @@
         src="https://placehold.co/1600x900/2D6A4F/FFFFFF?text=Hero+Image+—+Replace+With+Real+Photo"
         alt="Happy dogs at Dog Dad Boarding"
         class="hero__img"
+        fetchpriority="high"
       >
     </div>
     <div class="hero__content">
@@ -150,7 +154,7 @@
         <img
           src="https://placehold.co/600x700/40916C/FFFFFF?text=Owner+Photo+—+Replace+With+Real+Photo"
           alt="Dog Dad owner with their dogs"
-          loading="lazy"
+          loading="lazy" decoding="async"
         >
         <div class="about__image-badge">
           <strong>5+</strong>
@@ -215,22 +219,22 @@
       </div>
       <div class="gallery__grid">
         <div class="gallery__item gallery__item--wide">
-          <img src="https://placehold.co/800x450/52B788/FFFFFF?text=Photo+1+—+Dogs+Playing" alt="Dogs playing together" loading="lazy">
+          <img src="https://placehold.co/800x450/52B788/FFFFFF?text=Photo+1+—+Dogs+Playing" alt="Dogs playing together" loading="lazy" decoding="async">
         </div>
         <div class="gallery__item">
-          <img src="https://placehold.co/400x400/74C69D/FFFFFF?text=Photo+2" alt="Dog resting" loading="lazy">
+          <img src="https://placehold.co/400x400/74C69D/FFFFFF?text=Photo+2" alt="Dog resting" loading="lazy" decoding="async">
         </div>
         <div class="gallery__item">
-          <img src="https://placehold.co/400x400/95D5B2/FFFFFF?text=Photo+3" alt="Dog on a walk" loading="lazy">
+          <img src="https://placehold.co/400x400/95D5B2/FFFFFF?text=Photo+3" alt="Dog on a walk" loading="lazy" decoding="async">
         </div>
         <div class="gallery__item">
-          <img src="https://placehold.co/400x400/B7E4C7/1B4332?text=Photo+4" alt="Grooming session" loading="lazy">
+          <img src="https://placehold.co/400x400/B7E4C7/1B4332?text=Photo+4" alt="Grooming session" loading="lazy" decoding="async">
         </div>
         <div class="gallery__item">
-          <img src="https://placehold.co/400x400/52B788/FFFFFF?text=Photo+5" alt="Happy dog" loading="lazy">
+          <img src="https://placehold.co/400x400/52B788/FFFFFF?text=Photo+5" alt="Happy dog" loading="lazy" decoding="async">
         </div>
         <div class="gallery__item gallery__item--wide">
-          <img src="https://placehold.co/800x450/40916C/FFFFFF?text=Photo+6+—+Group+Play+Time" alt="Dogs enjoying group play time" loading="lazy">
+          <img src="https://placehold.co/800x450/40916C/FFFFFF?text=Photo+6+—+Group+Play+Time" alt="Dogs enjoying group play time" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery__cta">
@@ -257,7 +261,7 @@
           <div class="testimonial-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
           <p>"Alex is absolutely incredible with dogs. Our golden retriever, Biscuit, is always so excited to come here. We get daily photos and come home to a happy, tired pup. Couldn't recommend more!"</p>
           <div class="testimonial-card__author">
-            <img src="https://placehold.co/48x48/D8F3DC/1B4332?text=SJ" alt="Sarah J." loading="lazy">
+            <img src="https://placehold.co/48x48/D8F3DC/1B4332?text=SJ" alt="Sarah J." loading="lazy" decoding="async">
             <div>
               <strong>Sarah J.</strong>
               <span>Biscuit's Mom</span>
@@ -268,7 +272,7 @@
           <div class="testimonial-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
           <p>"We've tried several boarding options but Dog Dad is on a completely different level. The personalized care, the daily updates, the obvious love for our dog — we're customers for life."</p>
           <div class="testimonial-card__author">
-            <img src="https://placehold.co/48x48/D8F3DC/1B4332?text=MR" alt="Mike R." loading="lazy">
+            <img src="https://placehold.co/48x48/D8F3DC/1B4332?text=MR" alt="Mike R." loading="lazy" decoding="async">
             <div>
               <strong>Mike R.</strong>
               <span>Max's Dad</span>
@@ -279,7 +283,7 @@
           <div class="testimonial-card__stars" aria-label="4 out of 5 stars">★★★★<span style="opacity:0.3;">★</span></div>
           <p>"I was nervous leaving my anxious rescue for the first time, but Alex was patient, communicative, and sent so many reassuring photos. Luna actually seemed sad to leave!"</p>
           <div class="testimonial-card__author">
-            <img src="https://placehold.co/48x48/D8F3DC/1B4332?text=EK" alt="Emily K." loading="lazy">
+            <img src="https://placehold.co/48x48/D8F3DC/1B4332?text=EK" alt="Emily K." loading="lazy" decoding="async">
             <div>
               <strong>Emily K.</strong>
               <span>Luna's Mom</span>
@@ -330,8 +334,8 @@
 
         <div class="pricing-card pricing-card--featured">
           <div class="pricing-card__badge">Most Popular</div>
-          <div class="pricing-card__offer">First Visit — Save 20%</div>
           <div class="pricing-card__header">
+            <div class="pricing-card__offer">First Visit — Save 20%</div>
             <h3>Overnight Boarding</h3>
             <div class="pricing-card__price">
               <span class="price-amount">$65</span>
@@ -448,7 +452,7 @@
       </div>
       <form class="newsletter__form" id="newsletterForm">
         <div class="newsletter__input-group">
-          <input type="email" placeholder="Your email address" required aria-label="Email for newsletter">
+          <input type="email" name="email" placeholder="Your email address" required aria-label="Email for newsletter">
           <button type="submit" class="btn btn--primary">Subscribe</button>
         </div>
         <p class="newsletter__disclaimer">No spam, unsubscribe anytime.</p>
@@ -568,7 +572,7 @@
           height="400"
           style="border:0;"
           allowfullscreen=""
-          loading="lazy"
+          loading="lazy" decoding="async"
           referrerpolicy="no-referrer-when-downgrade"
           title="Dog Dad Boarding location in Austin, TX"
         ></iframe>
@@ -605,7 +609,7 @@
       <div class="resources__grid">
         <a href="#" class="resource-card">
           <div class="resource-card__thumb">
-            <img src="https://placehold.co/400x250/40916C/FFFFFF?text=Coming+Soon" alt="" loading="lazy">
+            <img src="https://placehold.co/400x250/40916C/FFFFFF?text=Coming+Soon" alt="" loading="lazy" decoding="async">
           </div>
           <div class="resource-card__body">
             <span class="resource-card__tag">Travel Tips</span>
@@ -615,7 +619,7 @@
         </a>
         <a href="#" class="resource-card">
           <div class="resource-card__thumb">
-            <img src="https://placehold.co/400x250/52B788/FFFFFF?text=Coming+Soon" alt="" loading="lazy">
+            <img src="https://placehold.co/400x250/52B788/FFFFFF?text=Coming+Soon" alt="" loading="lazy" decoding="async">
           </div>
           <div class="resource-card__body">
             <span class="resource-card__tag">Health</span>
@@ -625,7 +629,7 @@
         </a>
         <a href="#" class="resource-card">
           <div class="resource-card__thumb">
-            <img src="https://placehold.co/400x250/74C69D/FFFFFF?text=Coming+Soon" alt="" loading="lazy">
+            <img src="https://placehold.co/400x250/74C69D/FFFFFF?text=Coming+Soon" alt="" loading="lazy" decoding="async">
           </div>
           <div class="resource-card__body">
             <span class="resource-card__tag">Training</span>
