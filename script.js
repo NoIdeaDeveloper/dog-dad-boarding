@@ -12,11 +12,10 @@
   const hamburger  = document.getElementById('hamburger');
   const navLinks   = document.getElementById('navLinks');
   const navOverlay = document.getElementById('navOverlay');
+  const backToTop  = document.getElementById('backToTop');
 
-  const backToTop = document.getElementById('backToTop');
+  let ticking = false;
 
-  // Add "scrolled" class when user scrolls past 60px (rAF-throttled)
-  var ticking = false;
   function onScroll() {
     if (!ticking) {
       requestAnimationFrame(function () {
@@ -29,7 +28,7 @@
   }
 
   window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll(); // run on load in case page is already scrolled
+  onScroll();
 
   if (backToTop) {
     backToTop.addEventListener('click', function () {
@@ -37,12 +36,110 @@
     });
   }
 
-  let lastFocusedEl = null;
-  let focusableEls = null;
-  let firstFocusable = null;
-  let lastFocusable = null;
+  /* -------------------------------------------
+     Active nav section highlighting
+  ------------------------------------------- */
+  const navLinkItems = navLinks.querySelectorAll('a[href^="#"]');
+  const sectionIds = [];
 
-  // Open / close mobile menu
+  navLinkItems.forEach(function (link) {
+    var id = link.getAttribute('href').substring(1);
+    if (id && document.getElementById(id)) {
+      sectionIds.push(id);
+    }
+  });
+
+  function setActiveNavLink() {
+    var current = '';
+    var scrollPos = window.scrollY + parseInt(getComputedStyle(document.documentElement)
+      .getPropertyValue('--nav-height'), 10) + 80;
+
+    sectionIds.forEach(function (id) {
+      var section = document.getElementById(id);
+      if (section && section.offsetTop <= scrollPos) {
+        current = id;
+      }
+    });
+
+    navLinkItems.forEach(function (link) {
+      var href = link.getAttribute('href').substring(1);
+      if (href === current) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  }
+
+  // Add active-link styles via a MutationObserver approach (CSS-only is cleaner)
+  // The .active class is added to nav links for current section
+
+  /* -------------------------------------------
+     Hero trust badge count-up animation
+  ------------------------------------------- */
+  function animateCountUp(el, target, suffix, duration) {
+    var startTime = null;
+
+    function step(timestamp) {
+      if (!startTime) startTime = timestamp;
+      var progress = Math.min((timestamp - startTime) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      var current = Math.floor(eased * target);
+      el.textContent = current + suffix;
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        el.textContent = el.getAttribute('data-final') || (target + suffix);
+      }
+    }
+
+    requestAnimationFrame(step);
+  }
+
+  var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var trustBadges = document.querySelectorAll('.trust-badge strong');
+  var trustObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        var strong = entry.target;
+        var text = strong.getAttribute('data-final') || strong.textContent.trim();
+        strong.setAttribute('data-final', text);
+        var match = text.match(/^(\d+)(.*)$/);
+        if (match) {
+          if (prefersReducedMotion) {
+            strong.textContent = text;
+          } else {
+            var num = parseInt(match[1], 10);
+            var suffix = match[2];
+            animateCountUp(strong, num, suffix, 1500);
+          }
+        }
+        trustObserver.unobserve(strong);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  trustBadges.forEach(function (badge) {
+    var raw = badge.textContent.trim();
+    badge.setAttribute('data-final', raw);
+    var match = raw.match(/^(\d+)(.*)$/);
+    if (match) {
+      badge.textContent = '0' + match[2];
+    }
+    trustObserver.observe(badge);
+  });
+
+  /* -------------------------------------------
+     Mobile menu — open/close with overlay fix
+  ------------------------------------------- */
+  var lastFocusedEl = null;
+  var focusableEls = null;
+  var firstFocusable = null;
+  var lastFocusable = null;
+  var touchStartX = 0;
+  var touchStartY = 0;
+
   function openMenu() {
     navLinks.classList.add('open');
     navOverlay.classList.add('visible');
@@ -50,7 +147,6 @@
     hamburger.setAttribute('aria-expanded', 'true');
     document.body.style.overflow = 'hidden';
 
-    // Focus trap setup
     lastFocusedEl = document.activeElement;
     focusableEls = navLinks.querySelectorAll('a, button, [tabindex]:not([tabindex="-1"])');
     firstFocusable = focusableEls[0];
@@ -65,7 +161,6 @@
     hamburger.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
 
-    // Restore focus
     if (lastFocusedEl) lastFocusedEl.focus();
   }
 
@@ -73,7 +168,6 @@
     navLinks.classList.contains('open') ? closeMenu() : openMenu();
   });
 
-  // Trap Tab focus inside the mobile menu
   function handleMenuKeydown(e) {
     if (!navLinks.classList.contains('open')) return;
 
@@ -93,46 +187,69 @@
   }
 
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') closeMenu();
+    if (e.key === 'Escape' && navLinks.classList.contains('open')) closeMenu();
     handleMenuKeydown(e);
   });
 
-  // Close when a nav link is clicked
   navLinks.querySelectorAll('a').forEach(function (link) {
     link.addEventListener('click', closeMenu);
   });
 
-  // Close when overlay backdrop is clicked
   navOverlay.addEventListener('click', closeMenu);
+
+  // Swipe-to-close on mobile menu
+  navLinks.addEventListener('touchstart', function (e) {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+
+  navLinks.addEventListener('touchend', function (e) {
+    var dx = e.changedTouches[0].clientX - touchStartX;
+    var dy = e.changedTouches[0].clientY - touchStartY;
+    if (Math.abs(dx) > Math.abs(dy) && dx > 70) {
+      closeMenu();
+    }
+  });
 
   /* -------------------------------------------
      Smooth scroll (fallback for older browsers)
   ------------------------------------------- */
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
     anchor.addEventListener('click', function (e) {
-      const targetId = anchor.getAttribute('href');
+      var targetId = anchor.getAttribute('href');
       if (targetId === '#') return;
-      const target = document.querySelector(targetId);
+      var target = document.querySelector(targetId);
       if (!target) return;
       e.preventDefault();
-      const offset = parseInt(getComputedStyle(document.documentElement)
+      var offset = parseInt(getComputedStyle(document.documentElement)
         .getPropertyValue('--nav-height'), 10) || 72;
-      const top = target.getBoundingClientRect().top + window.scrollY - offset;
-      window.scrollTo({ top, behavior: 'smooth' });
+      var top = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top: top, behavior: 'smooth' });
     });
   });
 
   /* -------------------------------------------
-      Gallery lightbox
+     Gallery lightbox with prev/next navigation
   ------------------------------------------- */
   (function () {
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightboxImg');
+    var lightbox = document.getElementById('lightbox');
+    var lightboxImg = document.getElementById('lightboxImg');
     if (!lightbox || !lightboxImg) return;
 
-    function openLightbox(src, alt) {
-      lightboxImg.src = src;
-      lightboxImg.alt = alt || '';
+    var galleryImages = [];
+    var currentIndex = 0;
+
+    // Collect all gallery images
+    document.querySelectorAll('.gallery__item img').forEach(function (img, i) {
+      galleryImages.push({ src: img.src, alt: img.alt });
+    });
+
+    function openLightbox(index) {
+      if (index < 0 || index >= galleryImages.length) return;
+      currentIndex = index;
+      var item = galleryImages[currentIndex];
+      lightboxImg.src = item.src;
+      lightboxImg.alt = item.alt || '';
       lightbox.classList.add('open');
       document.body.style.overflow = 'hidden';
       lightbox.querySelector('.lightbox__close').focus();
@@ -144,46 +261,95 @@
       lightboxImg.src = '';
     }
 
-    document.querySelectorAll('.gallery__item img').forEach(function (img) {
-      img.addEventListener('click', function () {
-        openLightbox(img.src, img.alt);
+    function showPrev() {
+      var idx = currentIndex - 1;
+      if (idx < 0) idx = galleryImages.length - 1;
+      openLightbox(idx);
+    }
+
+    function showNext() {
+      var idx = currentIndex + 1;
+      if (idx >= galleryImages.length) idx = 0;
+      openLightbox(idx);
+    }
+
+    // Click handlers on gallery items (both img clicks and keyboard Enter/Space)
+    document.querySelectorAll('.gallery__item').forEach(function (item, i) {
+      item.addEventListener('click', function () {
+        openLightbox(i);
+      });
+
+      item.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openLightbox(i);
+        }
       });
     });
 
+    // Close on backdrop click
     lightbox.addEventListener('click', function (e) {
-      if (e.target === lightbox || e.target.classList.contains('lightbox__close')) {
-        closeLightbox();
-      }
+      if (e.target === lightbox) closeLightbox();
     });
 
+    // Close button
+    var closeBtn = lightbox.querySelector('.lightbox__close');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeLightbox);
+    }
+
+    // Prev/next buttons
+    var prevBtn = lightbox.querySelector('.lightbox__nav--prev');
+    var nextBtn = lightbox.querySelector('.lightbox__nav--next');
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        showPrev();
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        showNext();
+      });
+    }
+
+    // Keyboard navigation
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Escape') {
+        closeLightbox();
+      } else if (e.key === 'ArrowLeft') {
+        showPrev();
+      } else if (e.key === 'ArrowRight') {
+        showNext();
+      }
     });
   })();
 
   /* -------------------------------------------
-      Scroll-reveal animations
+     Scroll-reveal animations
   ------------------------------------------- */
-  const revealElements = document.querySelectorAll(
+  var revealElements = document.querySelectorAll(
     '.service-card, .gallery__item, .testimonial-card, ' +
     '.pricing-card, .about__image, .about__content, ' +
     '.contact__info, .contact__form, .faq__item, ' +
     '.resource-card, .newsletter__content, .newsletter__form'
   );
 
-  // Add reveal class + staggered delays within card groups
   revealElements.forEach(function (el) {
     el.classList.add('reveal');
   });
 
-  // Add stagger delays to sibling cards
   ['.service-card', '.testimonial-card', '.pricing-card', '.gallery__item'].forEach(function (selector) {
     document.querySelectorAll(selector).forEach(function (el, i) {
       el.style.transitionDelay = (i * 0.08) + 's';
     });
   });
 
-  const revealObserver = new IntersectionObserver(
+  var revealObserver = new IntersectionObserver(
     function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
@@ -200,10 +366,10 @@
   });
 
   /* -------------------------------------------
-     Contact form: simple submission feedback
+     Contact form: validation + submission
   ------------------------------------------- */
-  const form = document.getElementById('contactForm');
-  const formStatus = document.getElementById('formStatus');
+  var form = document.getElementById('contactForm');
+  var formStatus = document.getElementById('formStatus');
 
   function setFormStatus(message, type) {
     if (!formStatus) return;
@@ -211,8 +377,7 @@
     formStatus.className = 'form-status' + (type ? ' form-status--' + type : '');
   }
 
-  /* Field validation helpers */
-  const validators = {
+  var validators = {
     name: {
       validate: function (val) { return val.trim().length > 0; },
       message: 'Please enter your name.'
@@ -277,7 +442,6 @@
     return valid;
   }
 
-  // Clear errors on input
   Object.keys(validators).forEach(function (fieldId) {
     var input = document.getElementById(fieldId);
     if (!input) return;
@@ -310,8 +474,10 @@
           form.reset();
         } else {
           return response.json().then(function (data) {
-            if (Object.values(data.errors).length) {
+            if (data.errors && Object.values(data.errors).length) {
               setFormStatus('Something went wrong. Please try again.', 'error');
+            } else {
+              setFormStatus('Server error. Please try again later.', 'error');
             }
           });
         }
@@ -325,21 +491,21 @@
   }
 
   /* -------------------------------------------
-      Dynamic copyright year
+     Dynamic copyright year
   ------------------------------------------- */
-  const yearEl = document.getElementById('year');
+  var yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
   /* -------------------------------------------
-      Set minimum date for date inputs to today
+     Set minimum date for date inputs to today
   ------------------------------------------- */
-  const today = new Date().toISOString().split('T')[0];
+  var today = new Date().toISOString().split('T')[0];
   document.querySelectorAll('input[type="date"]').forEach(function (input) {
     input.setAttribute('min', today);
   });
 
-  const startInput = document.getElementById('start');
-  const endInput   = document.getElementById('end');
+  var startInput = document.getElementById('start');
+  var endInput   = document.getElementById('end');
 
   if (startInput && endInput) {
     startInput.addEventListener('change', function () {
@@ -351,7 +517,7 @@
   }
 
   /* -------------------------------------------
-      Newsletter form
+     Newsletter form — with error feedback
   ------------------------------------------- */
   var newsletterForm = document.getElementById('newsletterForm');
   if (newsletterForm) {
@@ -375,14 +541,47 @@
           setTimeout(function () {
             input.placeholder = 'Your email address';
           }, 4000);
+        } else {
+          input.placeholder = 'Something went wrong. Try again.';
+          setTimeout(function () {
+            input.placeholder = 'Your email address';
+          }, 4000);
         }
       }).catch(function () {
-        // silently fail — no critical feature
+        input.placeholder = 'Network error. Try again.';
+        setTimeout(function () {
+          input.placeholder = 'Your email address';
+        }, 4000);
       }).finally(function () {
         btn.textContent = originalText;
         btn.disabled = false;
       });
     });
+  }
+
+  /* -------------------------------------------
+     Nav active link: update on scroll
+  ------------------------------------------- */
+  window.addEventListener('scroll', function () {
+    setActiveNavLink();
+  }, { passive: true });
+  setActiveNavLink();
+
+  /* -------------------------------------------
+     Lazy-load Google Maps iframe
+  ------------------------------------------- */
+  var mapIframe = document.querySelector('.map-section__embed iframe');
+  if (mapIframe && mapIframe.hasAttribute('data-src')) {
+    var mapObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          mapIframe.src = mapIframe.getAttribute('data-src');
+          mapIframe.removeAttribute('data-src');
+          mapObserver.unobserve(mapIframe);
+        }
+      });
+    }, { rootMargin: '200px' });
+    mapObserver.observe(mapIframe);
   }
 
 })();
