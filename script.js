@@ -473,13 +473,7 @@
           setFormStatus("Sent! We'll be in touch within 24 hours.", 'success');
           form.reset();
         } else {
-          return response.json().then(function (data) {
-            if (data.errors && Object.values(data.errors).length) {
-              setFormStatus('Something went wrong. Please try again.', 'error');
-            } else {
-              setFormStatus('Server error. Please try again later.', 'error');
-            }
-          });
+          setFormStatus('Server error. Please try again later.', 'error');
         }
       }).catch(function () {
         setFormStatus('Network error. Please check your connection and try again.', 'error');
@@ -530,7 +524,7 @@
       btn.textContent = 'Subscribing…';
       btn.disabled = true;
 
-      fetch('https://formspree.io/f/YOUR_FORM_ID', {
+      fetch('https://submit-form.com/YOUR_FORM_ID', {
         method: 'POST',
         body: new FormData(newsletterForm),
         headers: { 'Accept': 'application/json' }
@@ -568,20 +562,38 @@
   setActiveNavLink();
 
   /* -------------------------------------------
-     Lazy-load Google Maps iframe
+     Lazy-load OpenStreetMap via Leaflet
   ------------------------------------------- */
-  var mapIframe = document.querySelector('.map-section__embed iframe');
-  if (mapIframe && mapIframe.hasAttribute('data-src')) {
+  var mapEl = document.getElementById('map');
+  if (mapEl) {
     var mapObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
-          mapIframe.src = mapIframe.getAttribute('data-src');
-          mapIframe.removeAttribute('data-src');
-          mapObserver.unobserve(mapIframe);
+          var L = window.L;
+          if (!L) return;
+
+          var map = L.map(mapEl, {
+            center: [30.2672, -97.7431],
+            zoom: 12,
+            scrollWheelZoom: false,
+            zoomControl: true
+          });
+
+          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+            maxZoom: 18
+          }).addTo(map);
+
+          L.marker([30.2672, -97.7431])
+            .addTo(map)
+            .bindPopup('<strong>Dog Dad Boarding</strong><br>Austin, TX')
+            .openPopup();
+
+          mapObserver.unobserve(mapEl);
         }
       });
     }, { rootMargin: '200px' });
-    mapObserver.observe(mapIframe);
+    mapObserver.observe(mapEl);
   }
 
 })();

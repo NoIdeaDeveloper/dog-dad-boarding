@@ -1425,8 +1425,10 @@ h3 { font-size: 1.375rem; }
   box-shadow: var(--shadow);
 }
 
-.map-section__embed iframe {
-  display: block;
+.map-section__embed #map {
+  width: 100%;
+  height: 400px;
+  background: var(--bg-alt);
 }
 
 .map-section__info h3 {
@@ -1466,7 +1468,7 @@ h3 { font-size: 1.375rem; }
     gap: 32px;
   }
 
-  .map-section__embed iframe {
+  .map-section__embed #map {
     height: 260px;
   }
 }
