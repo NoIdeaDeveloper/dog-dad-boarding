@@ -8,19 +8,31 @@
   /* -------------------------------------------
      Navigation: scroll effect + mobile menu
   ------------------------------------------- */
-  const nav        = document.getElementById('nav');
-  const hamburger  = document.getElementById('hamburger');
-  const navLinks   = document.getElementById('navLinks');
-  const navOverlay = document.getElementById('navOverlay');
-  const backToTop  = document.getElementById('backToTop');
+  var nav        = document.getElementById('nav');
+  var hamburger  = document.getElementById('hamburger');
+  var navLinks   = document.getElementById('navLinks');
+  var navOverlay = document.getElementById('navOverlay');
+  var backToTop  = document.getElementById('backToTop');
 
-  let ticking = false;
+  if (!nav || !hamburger || !navLinks || !navOverlay) return;
+
+  var ticking = false;
+  var cachedNavHeight = 72;
+
+  function updateNavHeight() {
+    var val = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-height'), 10);
+    cachedNavHeight = isNaN(val) ? 72 : val;
+  }
+
+  updateNavHeight();
+  window.addEventListener('resize', updateNavHeight, { passive: true });
 
   function onScroll() {
     if (!ticking) {
       requestAnimationFrame(function () {
         nav.classList.toggle('scrolled', window.scrollY > 60);
         if (backToTop) backToTop.classList.toggle('visible', window.scrollY > 500);
+        setActiveNavLink();
         ticking = false;
       });
       ticking = true;
@@ -39,40 +51,39 @@
   /* -------------------------------------------
      Active nav section highlighting
   ------------------------------------------- */
-  const navLinkItems = navLinks.querySelectorAll('a[href^="#"]');
-  const sectionIds = [];
+  var navLinkItems = navLinks.querySelectorAll('a[href^="#"]');
+  var sectionIds = [];
+  var linkHrefs = [];
 
   navLinkItems.forEach(function (link) {
     var id = link.getAttribute('href').substring(1);
     if (id && document.getElementById(id)) {
       sectionIds.push(id);
+      linkHrefs.push(id);
     }
   });
 
   function setActiveNavLink() {
     var current = '';
-    var scrollPos = window.scrollY + parseInt(getComputedStyle(document.documentElement)
-      .getPropertyValue('--nav-height'), 10) + 80;
+    var scrollPos = window.scrollY + cachedNavHeight + 80;
 
-    sectionIds.forEach(function (id) {
-      var section = document.getElementById(id);
+    for (var i = 0; i < sectionIds.length; i++) {
+      var section = document.getElementById(sectionIds[i]);
       if (section && section.offsetTop <= scrollPos) {
-        current = id;
+        current = sectionIds[i];
       }
-    });
+    }
 
-    navLinkItems.forEach(function (link) {
-      var href = link.getAttribute('href').substring(1);
-      if (href === current) {
-        link.classList.add('active');
+    for (var j = 0; j < navLinkItems.length; j++) {
+      if (linkHrefs[j] === current) {
+        navLinkItems[j].classList.add('active');
       } else {
-        link.classList.remove('active');
+        navLinkItems[j].classList.remove('active');
       }
-    });
+    }
   }
 
-  // Add active-link styles via a MutationObserver approach (CSS-only is cleaner)
-  // The .active class is added to nav links for current section
+  setActiveNavLink();
 
   /* -------------------------------------------
      Hero trust badge count-up animation
@@ -187,8 +198,15 @@
   }
 
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && navLinks.classList.contains('open')) closeMenu();
-    handleMenuKeydown(e);
+    if (e.key === 'Escape') {
+      if (navLinks.classList.contains('open')) {
+        closeMenu();
+        return;
+      }
+    }
+    if (navLinks.classList.contains('open')) {
+      handleMenuKeydown(e);
+    }
   });
 
   navLinks.querySelectorAll('a').forEach(function (link) {
@@ -218,12 +236,15 @@
     anchor.addEventListener('click', function (e) {
       var targetId = anchor.getAttribute('href');
       if (targetId === '#') return;
-      var target = document.querySelector(targetId);
+      var target;
+      try {
+        target = document.querySelector(targetId);
+      } catch (err) {
+        return;
+      }
       if (!target) return;
       e.preventDefault();
-      var offset = parseInt(getComputedStyle(document.documentElement)
-        .getPropertyValue('--nav-height'), 10) || 72;
-      var top = target.getBoundingClientRect().top + window.scrollY - offset;
+      var top = target.getBoundingClientRect().top + window.scrollY - cachedNavHeight;
       window.scrollTo({ top: top, behavior: 'smooth' });
     });
   });
@@ -238,15 +259,17 @@
 
     var galleryImages = [];
     var currentIndex = 0;
+    var lightboxTrigger = null;
 
     // Collect all gallery images
-    document.querySelectorAll('.gallery__item img').forEach(function (img, i) {
+    document.querySelectorAll('.gallery__item img').forEach(function (img) {
       galleryImages.push({ src: img.src, alt: img.alt });
     });
 
-    function openLightbox(index) {
+    function openLightbox(index, triggerEl) {
       if (index < 0 || index >= galleryImages.length) return;
       currentIndex = index;
+      lightboxTrigger = triggerEl || null;
       var item = galleryImages[currentIndex];
       lightboxImg.src = item.src;
       lightboxImg.alt = item.alt || '';
@@ -259,30 +282,40 @@
       lightbox.classList.remove('open');
       document.body.style.overflow = '';
       lightboxImg.src = '';
+      if (lightboxTrigger) {
+        lightboxTrigger.focus();
+        lightboxTrigger = null;
+      }
     }
 
     function showPrev() {
       var idx = currentIndex - 1;
       if (idx < 0) idx = galleryImages.length - 1;
-      openLightbox(idx);
+      currentIndex = idx;
+      var item = galleryImages[currentIndex];
+      lightboxImg.src = item.src;
+      lightboxImg.alt = item.alt || '';
     }
 
     function showNext() {
       var idx = currentIndex + 1;
       if (idx >= galleryImages.length) idx = 0;
-      openLightbox(idx);
+      currentIndex = idx;
+      var item = galleryImages[currentIndex];
+      lightboxImg.src = item.src;
+      lightboxImg.alt = item.alt || '';
     }
 
     // Click handlers on gallery items (both img clicks and keyboard Enter/Space)
     document.querySelectorAll('.gallery__item').forEach(function (item, i) {
       item.addEventListener('click', function () {
-        openLightbox(i);
+        openLightbox(i, item);
       });
 
       item.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          openLightbox(i);
+          openLightbox(i, item);
         }
       });
     });
@@ -316,17 +349,35 @@
       });
     }
 
-    // Keyboard navigation
-    document.addEventListener('keydown', function (e) {
+    // Focus trap for lightbox
+    function handleLightboxKeydown(e) {
       if (!lightbox.classList.contains('open')) return;
+
       if (e.key === 'Escape') {
         closeLightbox();
       } else if (e.key === 'ArrowLeft') {
         showPrev();
       } else if (e.key === 'ArrowRight') {
         showNext();
+      } else if (e.key === 'Tab') {
+        var focusable = lightbox.querySelectorAll('button, [tabindex]:not([tabindex="-1"])');
+        var first = focusable[0];
+        var last = focusable[focusable.length - 1];
+        if (e.shiftKey) {
+          if (document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+          }
+        } else {
+          if (document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+          }
+        }
       }
-    });
+    }
+
+    document.addEventListener('keydown', handleLightboxKeydown);
   })();
 
   /* -------------------------------------------
@@ -351,12 +402,18 @@
 
   var revealObserver = new IntersectionObserver(
     function (entries) {
+      var allRevealed = true;
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
           revealObserver.unobserve(entry.target);
+        } else {
+          allRevealed = false;
         }
       });
+      if (allRevealed) {
+        revealObserver.disconnect();
+      }
     },
     { threshold: 0.1, rootMargin: '0px 0px -48px 0px' }
   );
@@ -387,29 +444,47 @@
       message: 'Please enter a valid email address.'
     },
     phone: {
-      validate: function () { return true; },
-      message: ''
+      validate: function (val) {
+        if (!val.trim()) return true;
+        return /^[\d\s\-\(\)\+]{7,20}$/.test(val.trim());
+      },
+      message: 'Please enter a valid phone number.'
     },
     service: {
       validate: function (val) { return val !== ''; },
       message: 'Please select a service.'
     },
     start: {
-      validate: function () { return true; },
-      message: ''
+      validate: function (val) {
+        if (!val) return true;
+        var today = new Date().toISOString().split('T')[0];
+        return val >= today;
+      },
+      message: 'Start date cannot be in the past.'
     },
     end: {
-      validate: function () { return true; },
-      message: ''
+      validate: function (val) {
+        if (!val) return true;
+        var startVal = document.getElementById('start');
+        if (startVal && startVal.value && val < startVal.value) return false;
+        var today = new Date().toISOString().split('T')[0];
+        return val >= today;
+      },
+      message: 'End date must be on or after the start date.'
     },
     message: {
-      validate: function () { return true; },
-      message: ''
+      validate: function (val) {
+        if (!val.trim()) return true;
+        return val.trim().length >= 10;
+      },
+      message: 'Please provide at least 10 characters if entering a message.'
     }
   };
 
   function showFieldError(fieldId, message) {
-    var group = document.getElementById(fieldId).closest('.form-group');
+    var el = document.getElementById(fieldId);
+    if (!el) return;
+    var group = el.closest('.form-group');
     if (!group) return;
     var errorEl = document.getElementById(fieldId + '-error');
     if (errorEl) errorEl.textContent = message;
@@ -417,7 +492,9 @@
   }
 
   function clearFieldError(fieldId) {
-    var group = document.getElementById(fieldId).closest('.form-group');
+    var el = document.getElementById(fieldId);
+    if (!el) return;
+    var group = el.closest('.form-group');
     if (!group) return;
     group.classList.remove('has-error');
   }
@@ -453,30 +530,43 @@
     form.addEventListener('submit', function (e) {
       e.preventDefault();
 
+      // Honeypot check
+      var hp = form.querySelector('input[name="_hp"]');
+      if (hp && hp.value) return;
+
       setFormStatus('', '');
       if (!validateForm()) return;
 
       var submitBtn = form.querySelector('button[type="submit"]');
       var originalText = submitBtn.textContent;
 
-      submitBtn.textContent = 'Sending…';
+      submitBtn.textContent = 'Sending\u2026';
       submitBtn.disabled = true;
 
       var formData = new FormData(form);
+      var controller = new AbortController();
+      var timeoutId = setTimeout(function () { controller.abort(); }, 15000);
 
       fetch(form.action, {
         method: 'POST',
         body: formData,
-        headers: { 'Accept': 'application/json' }
+        headers: { 'Accept': 'application/json' },
+        signal: controller.signal
       }).then(function (response) {
+        clearTimeout(timeoutId);
         if (response.ok) {
           setFormStatus("Sent! We'll be in touch within 24 hours.", 'success');
           form.reset();
         } else {
           setFormStatus('Server error. Please try again later.', 'error');
         }
-      }).catch(function () {
-        setFormStatus('Network error. Please check your connection and try again.', 'error');
+      }).catch(function (err) {
+        clearTimeout(timeoutId);
+        if (err.name === 'AbortError') {
+          setFormStatus('Request timed out. Please try again.', 'error');
+        } else {
+          setFormStatus('Network error. Please check your connection and try again.', 'error');
+        }
       }).finally(function () {
         submitBtn.textContent = originalText;
         submitBtn.disabled = false;
@@ -515,36 +605,62 @@
   ------------------------------------------- */
   var newsletterForm = document.getElementById('newsletterForm');
   if (newsletterForm) {
+    var nlTimeoutId = null;
+
     newsletterForm.addEventListener('submit', function (e) {
       e.preventDefault();
+
+      // Honeypot check
+      var hp = newsletterForm.querySelector('input[name="_hp"]');
+      if (hp && hp.value) return;
+
       var input = newsletterForm.querySelector('input[type="email"]');
       var btn = newsletterForm.querySelector('button[type="submit"]');
       var originalText = btn.textContent;
 
-      btn.textContent = 'Subscribing…';
+      // Clear any pending timeout from previous submit
+      if (nlTimeoutId) {
+        clearTimeout(nlTimeoutId);
+        nlTimeoutId = null;
+      }
+
+      btn.textContent = 'Subscribing\u2026';
       btn.disabled = true;
+
+      var controller = new AbortController();
+      var fetchTimeout = setTimeout(function () { controller.abort(); }, 15000);
 
       fetch('https://submit-form.com/YOUR_FORM_ID', {
         method: 'POST',
         body: new FormData(newsletterForm),
-        headers: { 'Accept': 'application/json' }
+        headers: { 'Accept': 'application/json' },
+        signal: controller.signal
       }).then(function (res) {
+        clearTimeout(fetchTimeout);
         if (res.ok) {
           input.value = '';
           input.placeholder = 'Subscribed! Check your inbox.';
-          setTimeout(function () {
+          nlTimeoutId = setTimeout(function () {
             input.placeholder = 'Your email address';
+            nlTimeoutId = null;
           }, 4000);
         } else {
           input.placeholder = 'Something went wrong. Try again.';
-          setTimeout(function () {
+          nlTimeoutId = setTimeout(function () {
             input.placeholder = 'Your email address';
+            nlTimeoutId = null;
           }, 4000);
         }
-      }).catch(function () {
-        input.placeholder = 'Network error. Try again.';
-        setTimeout(function () {
+      }).catch(function (err) {
+        clearTimeout(fetchTimeout);
+        if (err.name === 'AbortError') {
+          input.placeholder = 'Request timed out. Try again.';
+        } else {
+          input.placeholder = 'Network error. Try again.';
+        }
+        nlTimeoutId = setTimeout(function () {
           input.placeholder = 'Your email address';
+          nlTimeoutId = null;
         }, 4000);
       }).finally(function () {
         btn.textContent = originalText;
@@ -552,14 +668,6 @@
       });
     });
   }
-
-  /* -------------------------------------------
-     Nav active link: update on scroll
-  ------------------------------------------- */
-  window.addEventListener('scroll', function () {
-    setActiveNavLink();
-  }, { passive: true });
-  setActiveNavLink();
 
   /* -------------------------------------------
      Lazy-load OpenStreetMap via Leaflet
@@ -590,6 +698,7 @@
             .openPopup();
 
           mapObserver.unobserve(mapEl);
+          mapObserver.disconnect();
         }
       });
     }, { rootMargin: '200px' });

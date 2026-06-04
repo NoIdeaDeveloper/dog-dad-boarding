@@ -11,13 +11,15 @@
   <meta property="og:url" content="https://dogdadboarding.com">
   <meta property="og:image" content="https://placehold.co/1200x630/1B4332/FFFFFF?text=Dog+Dad+Boarding">
   <meta name="twitter:card" content="summary_large_image">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com https://fonts.bunny.net; font-src https://fonts.bunny.net; img-src 'self' https://placehold.co https://*.tile.openstreetmap.org data:; connect-src 'self' https://submit-form.com https://*.tile.openstreetmap.org; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' https://submit-form.com">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231B4332'%3E%3Cellipse cx='7' cy='8' rx='2.2' ry='3'/%3E%3Cellipse cx='17' cy='8' rx='2.2' ry='3'/%3E%3Cellipse cx='12' cy='5.5' rx='2' ry='2.5'/%3E%3Cpath d='M5.5 13c0 3.5 2.9 6.5 6.5 6.5s6.5-3 6.5-6.5c0-1.2-.4-2.2-1.3-3.1C16.3 9 14.4 8.5 12 8.5s-4.3.5-5.2 1.4c-.9.9-1.3 1.9-1.3 3.1z'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.bunny.net">
   <link rel="preconnect" href="https://submit-form.com">
   <link rel="preconnect" href="https://unpkg.com">
   <link rel="preconnect" href="https://placehold.co">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="" defer></script>
+  <link rel="stylesheet" href="https://fonts.bunny.net/css?family=dm-sans:400,500,700|dm-serif-display:400&display=swap">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="anonymous">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="anonymous" defer></script>
   <link rel="preload" as="image" href="https://placehold.co/1600x900/2D6A4F/FFFFFF?text=Hero+Image+—+Replace+With+Real+Photo">
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -456,6 +458,9 @@
       <form class="newsletter__form" id="newsletterForm">
         <div class="newsletter__input-group">
           <input type="email" name="email" placeholder="Your email address" required aria-label="Email for newsletter">
+          <div style="position:absolute;left:-9999px" aria-hidden="true">
+            <input type="text" name="_hp" tabindex="-1" autocomplete="off">
+          </div>
           <button type="submit" class="btn btn--primary">Subscribe</button>
         </div>
         <p class="newsletter__disclaimer">No spam, unsubscribe anytime.</p>
@@ -509,6 +514,9 @@
       </div>
 
       <form class="contact__form" id="contactForm" action="https://submit-form.com/YOUR_FORM_ID" method="POST" novalidate>
+        <div style="position:absolute;left:-9999px" aria-hidden="true">
+          <input type="text" name="_hp" tabindex="-1" autocomplete="off">
+        </div>
         <div class="form-row">
           <div class="form-group">
             <label for="name">Your Name</label>
@@ -603,7 +611,7 @@
       <div class="resources__grid">
         <a href="#" class="resource-card">
           <div class="resource-card__thumb">
-            <img src="https://placehold.co/400x250/40916C/FFFFFF?text=Coming+Soon" alt="" loading="lazy" decoding="async">
+            <img src="https://placehold.co/400x250/40916C/FFFFFF?text=Coming+Soon" alt="Preparing Your Dog for a Boarding Stay guide" loading="lazy" decoding="async">
           </div>
           <div class="resource-card__body">
             <span class="resource-card__tag">Travel Tips</span>
@@ -613,7 +621,7 @@
         </a>
         <a href="#" class="resource-card">
           <div class="resource-card__thumb">
-            <img src="https://placehold.co/400x250/52B788/FFFFFF?text=Coming+Soon" alt="" loading="lazy" decoding="async">
+            <img src="https://placehold.co/400x250/52B788/FFFFFF?text=Coming+Soon" alt="Seasonal Pet Care Tips for Austin guide" loading="lazy" decoding="async">
           </div>
           <div class="resource-card__body">
             <span class="resource-card__tag">Health</span>
@@ -623,7 +631,7 @@
         </a>
         <a href="#" class="resource-card">
           <div class="resource-card__thumb">
-            <img src="https://placehold.co/400x250/74C69D/FFFFFF?text=Coming+Soon" alt="" loading="lazy" decoding="async">
+            <img src="https://placehold.co/400x250/74C69D/FFFFFF?text=Coming+Soon" alt="Socialization Tips for Puppies guide" loading="lazy" decoding="async">
           </div>
           <div class="resource-card__body">
             <span class="resource-card__tag">Training</span>
@@ -679,8 +687,8 @@
       <div class="container footer__bottom-inner">
             <p>© <span id="year">2025</span> Dog Dad Boarding. All rights reserved.</p>
         <div class="footer__legal">
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Service</a>
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms of Service</a>
         </div>
       </div>
     </div>
