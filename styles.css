@@ -28,22 +28,27 @@
 }
 
 :root {
-  /* Colors */
-  --primary:        #1B4332;
-  --primary-light:  #40916C;
-  --primary-pale:   #D8F3DC;
-  --accent:         #E9762B;
-  --accent-light:   #F4A261;
-  --bg:             #FDFCF7;
-  --bg-alt:         #F0EDE4;
-  --text:           #1A1A1A;
-  --text-muted:     #6B6B6B;
-  --white:          #FFFFFF;
-  --border:         #E5E5E5;
+  /* Colors — modern farmhouse: field green, wheat gold, cream, oat, barn red */
+  --primary:        #3F4E28;
+  --primary-light:  #69833A;
+  --primary-pale:   #E9EDD9;
+  --accent:         #C0832F;
+  --accent-light:   #E3B563;
+  --barn:           #A4502F;
+  --bg:             #FAF6EC;
+  --bg-alt:         #F2EAD7;
+  --text:           #2E2A20;
+  --text-muted:     #6F6755;
+  --white:          #FFFDF8;
+  --border:         #E5DCC6;
 
-  /* Shadows */
-  --shadow:         0 4px 24px rgba(0, 0, 0, 0.07);
-  --shadow-lg:      0 16px 56px rgba(0, 0, 0, 0.12);
+  /* Typography */
+  --font-display:   'Fraunces', Georgia, serif;
+  --font-body:      'Nunito Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* Shadows — warm-toned, soft */
+  --shadow:         0 4px 24px rgba(74, 60, 30, 0.08);
+  --shadow-lg:      0 16px 56px rgba(74, 60, 30, 0.14);
 
   /* Shape */
   --radius:         20px;
@@ -64,7 +69,7 @@ html {
 }
 
 body {
-  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: var(--font-body);
   background-color: var(--bg);
   color: var(--text);
   line-height: 1.65;
@@ -85,9 +90,10 @@ button { font-family: inherit; }
 
 /* === Typography === */
 h1, h2, h3, h4 {
-  font-family: 'DM Serif Display', Georgia, serif;
+  font-family: var(--font-display);
   line-height: 1.2;
-  font-weight: 400;
+  font-weight: 500;
+  letter-spacing: -0.01em;
 }
 
 h1 { font-size: clamp(2.75rem, 6vw, 5rem); }
@@ -111,16 +117,27 @@ h3 { font-size: 1.375rem; }
 .section-eyebrow {
   display: block;
   font-size: 0.8125rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
+  font-weight: 700;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--primary-light);
+  color: var(--accent);
   margin-bottom: 12px;
 }
 
 .section-title {
   color: var(--primary);
   margin-bottom: 16px;
+}
+
+/* Wheat-gold flourish under centered section titles */
+.section-header .section-title::after {
+  content: '';
+  display: block;
+  width: 56px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--accent-light);
+  margin: 18px auto 0;
 }
 
 .section-subtitle {
@@ -155,7 +172,7 @@ h3 { font-size: 1.375rem; }
   background: var(--primary-light);
   border-color: var(--primary-light);
   transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(27, 67, 50, 0.3);
+  box-shadow: 0 8px 28px rgba(63, 78, 40, 0.3);
 }
 
 /* Dark-on-light outline */
@@ -226,7 +243,7 @@ h3 { font-size: 1.375rem; }
 }
 
 .nav.scrolled::before {
-  background: rgba(253, 252, 247, 0.96);
+  background: rgba(250, 246, 236, 0.96);
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
 }
@@ -242,7 +259,7 @@ h3 { font-size: 1.375rem; }
 }
 
 .nav__logo {
-  font-family: 'DM Serif Display', serif;
+  font-family: var(--font-display);
   font-size: 1.375rem;
   color: var(--white);
   display: flex;
@@ -305,7 +322,7 @@ h3 { font-size: 1.375rem; }
 .nav__cta:hover {
   background: var(--accent-light) !important;
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(233, 118, 43, 0.35) !important;
+  box-shadow: 0 6px 20px rgba(192, 131, 47, 0.35) !important;
 }
 
 /* Hamburger */
@@ -375,8 +392,21 @@ h3 { font-size: 1.375rem; }
   min-height: 100vh;
   display: flex;
   align-items: center;
-  padding: calc(var(--nav-height) + 48px) 24px 80px;
+  padding: calc(var(--nav-height) + 48px) 24px 120px;
   overflow: hidden;
+}
+
+/* Rolling-hills divider into the next section */
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 72px;
+  z-index: 2;
+  pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath fill='%23FAF6EC' d='M0 52 C 220 88 440 16 720 36 C 1000 56 1220 24 1440 48 L 1440 80 L 0 80 Z'/%3E%3C/svg%3E") bottom / 100% 100% no-repeat;
 }
 
 .hero__bg {
@@ -391,9 +421,9 @@ h3 { font-size: 1.375rem; }
   inset: 0;
   background: linear-gradient(
     135deg,
-    rgba(27, 67, 50, 0.88) 0%,
-    rgba(27, 67, 50, 0.6) 50%,
-    rgba(27, 67, 50, 0.3) 100%
+    rgba(46, 54, 26, 0.9) 0%,
+    rgba(53, 58, 30, 0.62) 50%,
+    rgba(94, 78, 35, 0.32) 100%
   );
 }
 
@@ -465,7 +495,7 @@ h3 { font-size: 1.375rem; }
 
 .trust-badge strong {
   font-size: 2.25rem;
-  font-family: 'DM Serif Display', serif;
+  font-family: var(--font-display);
   color: var(--white);
   line-height: 1;
 }
@@ -595,7 +625,7 @@ h3 { font-size: 1.375rem; }
 .about__image-badge strong {
   display: block;
   font-size: 2.25rem;
-  font-family: 'DM Serif Display', serif;
+  font-family: var(--font-display);
   line-height: 1;
   margin-bottom: 4px;
 }
@@ -846,7 +876,7 @@ h3 { font-size: 1.375rem; }
 
 .pricing-card__offer {
   display: inline-block;
-  background: var(--accent);
+  background: var(--barn);
   color: var(--white);
   padding: 4px 16px;
   border-radius: 100px;
@@ -875,7 +905,7 @@ h3 { font-size: 1.375rem; }
 }
 
 .price-amount {
-  font-family: 'DM Serif Display', serif;
+  font-family: var(--font-display);
   font-size: 3rem;
   color: var(--text);
   line-height: 1;
@@ -1042,7 +1072,7 @@ h3 { font-size: 1.375rem; }
   padding: 12px 16px;
   border: 1.5px solid var(--border);
   border-radius: var(--radius-sm);
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.9375rem;
   color: var(--text);
   background: var(--bg);
@@ -1063,7 +1093,7 @@ h3 { font-size: 1.375rem; }
 .form-group select:focus,
 .form-group textarea:focus {
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(27, 67, 50, 0.1);
+  box-shadow: 0 0 0 3px rgba(63, 78, 40, 0.12);
 }
 
 .form-group textarea {
@@ -1310,7 +1340,7 @@ h3 { font-size: 1.375rem; }
 
 .footer__links h4,
 .footer__contact h4 {
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -1554,7 +1584,7 @@ h3 { font-size: 1.375rem; }
   z-index: 800;
   padding: 12px 16px;
   padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
-  background: rgba(253, 252, 247, 0.96);
+  background: rgba(250, 246, 236, 0.96);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-top: 1px solid var(--border);
@@ -1998,13 +2028,17 @@ h3 { font-size: 1.375rem; }
   .nav__cta:hover {
     background: var(--accent-light) !important;
     transform: translateY(-2px);
-    box-shadow: 0 8px 28px rgba(233, 118, 43, 0.35) !important;
+    box-shadow: 0 8px 28px rgba(192, 131, 47, 0.35) !important;
   }
 
   /* Hero */
   .hero {
-    padding: calc(var(--nav-height) + 28px) 24px 60px;
+    padding: calc(var(--nav-height) + 28px) 24px 88px;
     min-height: 100svh;
+  }
+
+  .hero::after {
+    height: 44px;
   }
 
   .hero__badge {
