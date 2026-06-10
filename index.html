@@ -5,25 +5,150 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dog Dad Boarding — Premium Care for Your Best Friend</title>
   <meta name="description" content="Austin's premier dog boarding, daycare, grooming, and dog walking. Licensed & insured with 5+ years of experience. Your dog's home away from home.">
+  <meta name="theme-color" content="#1B4332">
+  <link rel="canonical" href="https://dogdadboarding.com">
+
+  <!-- Open Graph -->
   <meta property="og:title" content="Dog Dad Boarding — Premium Care for Your Best Friend">
   <meta property="og:description" content="Austin's premier dog boarding, daycare, grooming, and dog walking. Licensed & insured with 5+ years of experience.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://dogdadboarding.com">
-  <meta property="og:image" content="https://placehold.co/1200x630/1B4332/FFFFFF?text=Dog+Dad+Boarding">
+  <meta property="og:image" content="https://dogdadboarding.com/og-image.jpg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com https://fonts.bunny.net; font-src https://fonts.bunny.net; img-src 'self' https://placehold.co https://*.tile.openstreetmap.org data:; connect-src 'self' https://submit-form.com https://*.tile.openstreetmap.org; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' https://submit-form.com">
+
+  <!-- CSP: removed 'unsafe-inline' from script-src (no inline scripts); kept in style-src for Leaflet -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com https://fonts.bunny.net; font-src https://fonts.bunny.net; img-src 'self' https://placehold.co https://*.tile.openstreetmap.org data:; connect-src 'self' https://submit-form.com https://*.tile.openstreetmap.org; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' https://submit-form.com">
+
+  <!-- Favicon & icons -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231B4332'%3E%3Cellipse cx='7' cy='8' rx='2.2' ry='3'/%3E%3Cellipse cx='17' cy='8' rx='2.2' ry='3'/%3E%3Cellipse cx='12' cy='5.5' rx='2' ry='2.5'/%3E%3Cpath d='M5.5 13c0 3.5 2.9 6.5 6.5 6.5s6.5-3 6.5-6.5c0-1.2-.4-2.2-1.3-3.1C16.3 9 14.4 8.5 12 8.5s-4.3.5-5.2 1.4c-.9.9-1.3 1.9-1.3 3.1z'/%3E%3C/svg%3E">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231B4332'%3E%3Cellipse cx='7' cy='8' rx='2.2' ry='3'/%3E%3Cellipse cx='17' cy='8' rx='2.2' ry='3'/%3E%3Cellipse cx='12' cy='5.5' rx='2' ry='2.5'/%3E%3Cpath d='M5.5 13c0 3.5 2.9 6.5 6.5 6.5s6.5-3 6.5-6.5c0-1.2-.4-2.2-1.3-3.1C16.3 9 14.4 8.5 12 8.5s-4.3.5-5.2 1.4c-.9.9-1.3 1.9-1.3 3.1z'/%3E%3C/svg%3E">
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.bunny.net">
+  <link rel="stylesheet" href="https://fonts.bunny.net/css?family=dm-sans:400,500,700|dm-serif-display:400&display=swap">
+
+  <!-- External connections (Leaflet loaded lazily via JS) -->
   <link rel="preconnect" href="https://submit-form.com">
   <link rel="preconnect" href="https://unpkg.com">
   <link rel="preconnect" href="https://placehold.co">
-  <link rel="stylesheet" href="https://fonts.bunny.net/css?family=dm-sans:400,500,700|dm-serif-display:400&display=swap">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="anonymous">
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="anonymous" defer></script>
+
+  <!-- Hero image preload -->
   <link rel="preload" as="image" href="https://placehold.co/1600x900/2D6A4F/FFFFFF?text=Hero+Image+—+Replace+With+Real+Photo">
+
   <link rel="stylesheet" href="styles.css">
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "LocalBusiness",
+        "@id": "https://dogdadboarding.com/#business",
+        "name": "Dog Dad Boarding",
+        "description": "Austin's premier dog boarding, daycare, grooming, and dog walking service.",
+        "url": "https://dogdadboarding.com",
+        "telephone": "+15125550123",
+        "email": "hello@dogdadboarding.com",
+        "image": "https://dogdadboarding.com/og-image.jpg",
+        "priceRange": "$$",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "1234 Dogwood Ln",
+          "addressLocality": "Austin",
+          "addressRegion": "TX",
+          "postalCode": "78701",
+          "addressCountry": "US"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 30.2672,
+          "longitude": -97.7431
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+            "opens": "07:00",
+            "closes": "20:00"
+          }
+        ],
+        "sameAs": [
+          "https://instagram.com/dogdadboarding",
+          "https://facebook.com/dogdadboarding",
+          "https://tiktok.com/@dogdadboarding"
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What vaccinations do you require?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "We require proof of current Rabies, DHPP (Distemper/Parvo), and Bordetella (kennel cough) vaccinations. All vaccines must be administered at least 48 hours before check-in."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What should I bring for my dog's stay?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Bring your dog's regular food (pre-portioned), any medications, a leash/collar with ID tags, their bed or blanket if they have one, and favorite toys. We provide bowls, bedding, and enrichment toys."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I tour the facility before booking?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Absolutely! We encourage tours. Just reach out to schedule a visit. We'll show you our indoor/outdoor play areas, sleeping accommodations, and introduce you to the team."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is your cancellation policy?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "We require 48 hours notice for cancellations to receive a full refund. Late cancellations within 24 hours are charged 50% of the booking. No-shows are charged in full."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do you accept dogs that aren't spayed or neutered?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, we accept intact dogs. However, they must be separated during group play sessions to ensure everyone's safety. We'll discuss the best arrangement during booking."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do you handle emergencies?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "We are pet first aid and CPR certified. We partner with Austin Emergency Veterinary Clinic for 24/7 support. You'll be notified immediately if any medical concern arises."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
+
+  <!-- Reusable SVG symbols — rendered once, referenced everywhere -->
+  <svg style="display:none" aria-hidden="true">
+    <defs>
+      <symbol id="icon-check-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"/>
+      </symbol>
+      <symbol id="icon-check-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"/>
+      </symbol>
+    </defs>
+  </svg>
 
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
@@ -64,6 +189,7 @@
         src="https://placehold.co/1600x900/2D6A4F/FFFFFF?text=Hero+Image+—+Replace+With+Real+Photo"
         alt="Happy dogs at Dog Dad Boarding"
         class="hero__img"
+        width="1600" height="900"
         fetchpriority="high"
       >
     </div>
@@ -108,7 +234,7 @@
       <div class="services__grid">
         <div class="service-card">
           <div class="service-card__icon">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
             </svg>
           </div>
@@ -118,7 +244,7 @@
         </div>
         <div class="service-card">
           <div class="service-card__icon">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
             </svg>
           </div>
@@ -128,7 +254,7 @@
         </div>
         <div class="service-card">
           <div class="service-card__icon">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
             </svg>
           </div>
@@ -138,7 +264,7 @@
         </div>
         <div class="service-card">
           <div class="service-card__icon">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <circle cx="12" cy="5" r="3"/><path d="M12 8v13M9 21h6M6 10l6-2 6 2"/>
             </svg>
           </div>
@@ -150,6 +276,54 @@
     </div>
   </section>
 
+  <!-- How It Works -->
+  <section class="how-it-works" id="how-it-works">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Simple Process</p>
+        <h2 class="section-title">How It Works</h2>
+        <p class="section-subtitle">Getting started is easy — your pup will be in good hands in three simple steps.</p>
+      </div>
+      <div class="how-it-works__grid">
+        <div class="how-it-works__step">
+          <div class="how-it-works__number">1</div>
+          <div class="how-it-works__icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
+            </svg>
+          </div>
+          <h3>Meet &amp; Greet</h3>
+          <p>Schedule a free visit so your dog can explore the space and meet us before their stay. No surprises on drop-off day.</p>
+        </div>
+        <div class="how-it-works__connector" aria-hidden="true"></div>
+        <div class="how-it-works__step">
+          <div class="how-it-works__number">2</div>
+          <div class="how-it-works__icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+          </div>
+          <h3>Book Your Dates</h3>
+          <p>Tell us your schedule and your dog's needs. We'll confirm availability and handle all the details — stress-free.</p>
+        </div>
+        <div class="how-it-works__connector" aria-hidden="true"></div>
+        <div class="how-it-works__step">
+          <div class="how-it-works__number">3</div>
+          <div class="how-it-works__icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/>
+            </svg>
+          </div>
+          <h3>Daily Photo Updates</h3>
+          <p>Relax while we send photos and videos every single day. Pick up a happy, tired pup when you're back.</p>
+        </div>
+      </div>
+      <div class="how-it-works__cta">
+        <a href="#contact" class="btn btn--primary">Schedule a Meet &amp; Greet</a>
+      </div>
+    </div>
+  </section>
+
   <!-- About -->
   <section class="about" id="about">
     <div class="container about__container">
@@ -157,6 +331,7 @@
         <img
           src="https://placehold.co/600x700/40916C/FFFFFF?text=Owner+Photo+—+Replace+With+Real+Photo"
           alt="Dog Dad owner with their dogs"
+          width="600" height="700"
           loading="lazy" decoding="async"
         >
         <div class="about__image-badge">
@@ -172,7 +347,7 @@
         <ul class="about__features">
           <li>
             <div class="feature-icon">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <svg width="14" height="14" stroke-width="3" aria-hidden="true"><use href="#icon-check-sm"/></svg>
             </div>
             <div>
               <strong>Licensed &amp; Insured</strong>
@@ -181,7 +356,7 @@
           </li>
           <li>
             <div class="feature-icon">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <svg width="14" height="14" stroke-width="3" aria-hidden="true"><use href="#icon-check-sm"/></svg>
             </div>
             <div>
               <strong>Small Group Sizes</strong>
@@ -190,7 +365,7 @@
           </li>
           <li>
             <div class="feature-icon">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <svg width="14" height="14" stroke-width="3" aria-hidden="true"><use href="#icon-check-sm"/></svg>
             </div>
             <div>
               <strong>Daily Updates</strong>
@@ -199,7 +374,7 @@
           </li>
           <li>
             <div class="feature-icon">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <svg width="14" height="14" stroke-width="3" aria-hidden="true"><use href="#icon-check-sm"/></svg>
             </div>
             <div>
               <strong>Vet Partnership</strong>
@@ -221,23 +396,29 @@
         <p class="section-subtitle">A peek into daily life — replace these with your real photos.</p>
       </div>
       <div class="gallery__grid">
-        <div class="gallery__item gallery__item--wide" tabindex="0" role="button" aria-label="View larger: Dogs playing together">
-          <img src="https://placehold.co/800x450/52B788/FFFFFF?text=Photo+1+—+Dogs+Playing" alt="Dogs playing together" loading="lazy" decoding="async">
+        <div class="gallery__item gallery__item--wide" tabindex="0" role="button" aria-label="View larger: Dogs playing together"
+             data-full="https://placehold.co/1200x675/52B788/FFFFFF?text=Photo+1+Full">
+          <img src="https://placehold.co/800x450/52B788/FFFFFF?text=Photo+1+—+Dogs+Playing" alt="Dogs playing together" width="800" height="450" loading="lazy" decoding="async">
         </div>
-        <div class="gallery__item" tabindex="0" role="button" aria-label="View larger: Dog resting">
-          <img src="https://placehold.co/400x400/74C69D/FFFFFF?text=Photo+2" alt="Dog resting" loading="lazy" decoding="async">
+        <div class="gallery__item" tabindex="0" role="button" aria-label="View larger: Dog resting"
+             data-full="https://placehold.co/800x800/74C69D/FFFFFF?text=Photo+2+Full">
+          <img src="https://placehold.co/400x400/74C69D/FFFFFF?text=Photo+2" alt="Dog resting" width="400" height="400" loading="lazy" decoding="async">
         </div>
-        <div class="gallery__item" tabindex="0" role="button" aria-label="View larger: Dog on a walk">
-          <img src="https://placehold.co/400x400/95D5B2/FFFFFF?text=Photo+3" alt="Dog on a walk" loading="lazy" decoding="async">
+        <div class="gallery__item" tabindex="0" role="button" aria-label="View larger: Dog on a walk"
+             data-full="https://placehold.co/800x800/95D5B2/FFFFFF?text=Photo+3+Full">
+          <img src="https://placehold.co/400x400/95D5B2/FFFFFF?text=Photo+3" alt="Dog on a walk" width="400" height="400" loading="lazy" decoding="async">
         </div>
-        <div class="gallery__item" tabindex="0" role="button" aria-label="View larger: Grooming session">
-          <img src="https://placehold.co/400x400/B7E4C7/1B4332?text=Photo+4" alt="Grooming session" loading="lazy" decoding="async">
+        <div class="gallery__item" tabindex="0" role="button" aria-label="View larger: Grooming session"
+             data-full="https://placehold.co/800x800/B7E4C7/1B4332?text=Photo+4+Full">
+          <img src="https://placehold.co/400x400/B7E4C7/1B4332?text=Photo+4" alt="Grooming session" width="400" height="400" loading="lazy" decoding="async">
         </div>
-        <div class="gallery__item" tabindex="0" role="button" aria-label="View larger: Happy dog">
-          <img src="https://placehold.co/400x400/52B788/FFFFFF?text=Photo+5" alt="Happy dog" loading="lazy" decoding="async">
+        <div class="gallery__item" tabindex="0" role="button" aria-label="View larger: Happy dog"
+             data-full="https://placehold.co/800x800/52B788/FFFFFF?text=Photo+5+Full">
+          <img src="https://placehold.co/400x400/52B788/FFFFFF?text=Photo+5" alt="Happy dog" width="400" height="400" loading="lazy" decoding="async">
         </div>
-        <div class="gallery__item gallery__item--wide" tabindex="0" role="button" aria-label="View larger: Dogs enjoying group play time">
-          <img src="https://placehold.co/800x450/40916C/FFFFFF?text=Photo+6+—+Group+Play+Time" alt="Dogs enjoying group play time" loading="lazy" decoding="async">
+        <div class="gallery__item gallery__item--wide" tabindex="0" role="button" aria-label="View larger: Dogs enjoying group play time"
+             data-full="https://placehold.co/1200x675/40916C/FFFFFF?text=Photo+6+Full">
+          <img src="https://placehold.co/800x450/40916C/FFFFFF?text=Photo+6+—+Group+Play+Time" alt="Dogs enjoying group play time" width="800" height="450" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery__cta">
@@ -266,7 +447,7 @@
           <div class="testimonial-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
           <p>"Alex is absolutely incredible with dogs. Our golden retriever, Biscuit, is always so excited to come here. We get daily photos and come home to a happy, tired pup. Couldn't recommend more!"</p>
           <div class="testimonial-card__author">
-            <img src="https://placehold.co/48x48/D8F3DC/1B4332?text=SJ" alt="Sarah J." loading="lazy" decoding="async">
+            <img src="https://placehold.co/48x48/D8F3DC/1B4332?text=SJ" alt="Sarah J." width="48" height="48" loading="lazy" decoding="async">
             <div>
               <strong>Sarah J.</strong>
               <span>Biscuit's Mom</span>
@@ -277,7 +458,7 @@
           <div class="testimonial-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
           <p>"We've tried several boarding options but Dog Dad is on a completely different level. The personalized care, the daily updates, the obvious love for our dog — we're customers for life."</p>
           <div class="testimonial-card__author">
-            <img src="https://placehold.co/48x48/D8F3DC/1B4332?text=MR" alt="Mike R." loading="lazy" decoding="async">
+            <img src="https://placehold.co/48x48/D8F3DC/1B4332?text=MR" alt="Mike R." width="48" height="48" loading="lazy" decoding="async">
             <div>
               <strong>Mike R.</strong>
               <span>Max's Dad</span>
@@ -285,16 +466,22 @@
           </div>
         </div>
         <div class="testimonial-card">
-          <div class="testimonial-card__stars" aria-label="4 out of 5 stars">★★★★<span style="opacity:0.3;">★</span></div>
+          <div class="testimonial-card__stars" aria-label="4 out of 5 stars">★★★★<span class="star--dim">★</span></div>
           <p>"I was nervous leaving my anxious rescue for the first time, but Alex was patient, communicative, and sent so many reassuring photos. Luna actually seemed sad to leave!"</p>
           <div class="testimonial-card__author">
-            <img src="https://placehold.co/48x48/D8F3DC/1B4332?text=EK" alt="Emily K." loading="lazy" decoding="async">
+            <img src="https://placehold.co/48x48/D8F3DC/1B4332?text=EK" alt="Emily K." width="48" height="48" loading="lazy" decoding="async">
             <div>
               <strong>Emily K.</strong>
               <span>Luna's Mom</span>
             </div>
           </div>
         </div>
+      </div>
+      <div class="testimonials__reviews-link">
+        <a href="https://g.page/dogdadboarding/review" target="_blank" rel="noopener" class="btn btn--ghost">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          Read All Our Reviews on Google
+        </a>
       </div>
     </div>
   </section>
@@ -318,19 +505,19 @@
           </div>
           <ul class="pricing-card__features">
             <li>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <svg width="16" height="16" stroke-width="2.5" aria-hidden="true"><use href="#icon-check-lg"/></svg>
               Full day of supervised play
             </li>
             <li>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <svg width="16" height="16" stroke-width="2.5" aria-hidden="true"><use href="#icon-check-lg"/></svg>
               Feeding per your schedule
             </li>
             <li>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <svg width="16" height="16" stroke-width="2.5" aria-hidden="true"><use href="#icon-check-lg"/></svg>
               Daily photo update
             </li>
             <li>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <svg width="16" height="16" stroke-width="2.5" aria-hidden="true"><use href="#icon-check-lg"/></svg>
               Group &amp; solo play time
             </li>
           </ul>
@@ -349,23 +536,23 @@
           </div>
           <ul class="pricing-card__features">
             <li>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <svg width="16" height="16" stroke-width="2.5" aria-hidden="true"><use href="#icon-check-lg"/></svg>
               Everything in Daycare
             </li>
             <li>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <svg width="16" height="16" stroke-width="2.5" aria-hidden="true"><use href="#icon-check-lg"/></svg>
               Private sleeping space
             </li>
             <li>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <svg width="16" height="16" stroke-width="2.5" aria-hidden="true"><use href="#icon-check-lg"/></svg>
               Morning &amp; evening walks
             </li>
             <li>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <svg width="16" height="16" stroke-width="2.5" aria-hidden="true"><use href="#icon-check-lg"/></svg>
               Bedtime cuddles
             </li>
             <li>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <svg width="16" height="16" stroke-width="2.5" aria-hidden="true"><use href="#icon-check-lg"/></svg>
               Pickup &amp; drop-off available
             </li>
           </ul>
@@ -382,27 +569,56 @@
           </div>
           <ul class="pricing-card__features">
             <li>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <svg width="16" height="16" stroke-width="2.5" aria-hidden="true"><use href="#icon-check-lg"/></svg>
               Bath &amp; blow dry
             </li>
             <li>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <svg width="16" height="16" stroke-width="2.5" aria-hidden="true"><use href="#icon-check-lg"/></svg>
               Brush out
             </li>
             <li>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <svg width="16" height="16" stroke-width="2.5" aria-hidden="true"><use href="#icon-check-lg"/></svg>
               Nail trim &amp; file
             </li>
             <li>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <svg width="16" height="16" stroke-width="2.5" aria-hidden="true"><use href="#icon-check-lg"/></svg>
               Ear cleaning
             </li>
             <li>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <svg width="16" height="16" stroke-width="2.5" aria-hidden="true"><use href="#icon-check-lg"/></svg>
               Bandana or bow finish
             </li>
           </ul>
           <a href="#contact" class="btn btn--outline">Book Grooming</a>
+        </div>
+
+        <div class="pricing-card">
+          <div class="pricing-card__header">
+            <h3>Dog Walking</h3>
+            <div class="pricing-card__price">
+              <span class="price-amount">$25+</span>
+              <span class="price-period">/ walk</span>
+            </div>
+          </div>
+          <ul class="pricing-card__features">
+            <li>
+              <svg width="16" height="16" stroke-width="2.5" aria-hidden="true"><use href="#icon-check-lg"/></svg>
+              30 or 60 minute walks
+            </li>
+            <li>
+              <svg width="16" height="16" stroke-width="2.5" aria-hidden="true"><use href="#icon-check-lg"/></svg>
+              GPS-tracked route
+            </li>
+            <li>
+              <svg width="16" height="16" stroke-width="2.5" aria-hidden="true"><use href="#icon-check-lg"/></svg>
+              Post-walk report card
+            </li>
+            <li>
+              <svg width="16" height="16" stroke-width="2.5" aria-hidden="true"><use href="#icon-check-lg"/></svg>
+              Photos sent to your phone
+            </li>
+          </ul>
+          <a href="#contact" class="btn btn--outline">Book a Walk</a>
         </div>
       </div>
       <p class="pricing__note">Prices vary by dog size and breed. <a href="#contact">Contact us</a> for a personalized quote.</p>
@@ -421,27 +637,27 @@
       <div class="faq__list">
         <details class="faq__item">
           <summary>What vaccinations do you require?</summary>
-          <p>We require proof of current Rabies, DHPP (Distemper/Parvo), and Bordetella (kennel cough) vaccinations. All vaccines must be administered at least 48 hours before check-in.</p>
+          <div class="faq__body"><p>We require proof of current Rabies, DHPP (Distemper/Parvo), and Bordetella (kennel cough) vaccinations. All vaccines must be administered at least 48 hours before check-in.</p></div>
         </details>
         <details class="faq__item">
           <summary>What should I bring for my dog's stay?</summary>
-          <p>Bring your dog's regular food (pre-portioned), any medications, a leash/collar with ID tags, their bed or blanket if they have one, and favorite toys. We provide bowls, bedding, and enrichment toys.</p>
+          <div class="faq__body"><p>Bring your dog's regular food (pre-portioned), any medications, a leash/collar with ID tags, their bed or blanket if they have one, and favorite toys. We provide bowls, bedding, and enrichment toys.</p></div>
         </details>
         <details class="faq__item">
           <summary>Can I tour the facility before booking?</summary>
-          <p>Absolutely! We encourage tours. Just <a href="#contact">reach out</a> to schedule a visit. We'll show you our indoor/outdoor play areas, sleeping accommodations, and introduce you to the team.</p>
+          <div class="faq__body"><p>Absolutely! We encourage tours. Just <a href="#contact">reach out</a> to schedule a visit. We'll show you our indoor/outdoor play areas, sleeping accommodations, and introduce you to the team.</p></div>
         </details>
         <details class="faq__item">
           <summary>What is your cancellation policy?</summary>
-          <p>We require 48 hours notice for cancellations to receive a full refund. Late cancellations within 24 hours are charged 50% of the booking. No-shows are charged in full.</p>
+          <div class="faq__body"><p>We require 48 hours notice for cancellations to receive a full refund. Late cancellations within 24 hours are charged 50% of the booking. No-shows are charged in full.</p></div>
         </details>
         <details class="faq__item">
           <summary>Do you accept dogs that aren't spayed or neutered?</summary>
-          <p>Yes, we accept intact dogs. However, they must be separated during group play sessions to ensure everyone's safety. We'll discuss the best arrangement during booking.</p>
+          <div class="faq__body"><p>Yes, we accept intact dogs. However, they must be separated during group play sessions to ensure everyone's safety. We'll discuss the best arrangement during booking.</p></div>
         </details>
         <details class="faq__item">
           <summary>How do you handle emergencies?</summary>
-          <p>We are pet first aid and CPR certified. We partner with <strong>Austin Emergency Veterinary Clinic</strong> for 24/7 support. You'll be notified immediately if any medical concern arises.</p>
+          <div class="faq__body"><p>We are pet first aid and CPR certified. We partner with <strong>Austin Emergency Veterinary Clinic</strong> for 24/7 support. You'll be notified immediately if any medical concern arises.</p></div>
         </details>
       </div>
     </div>
@@ -464,6 +680,7 @@
           <button type="submit" class="btn btn--primary">Subscribe</button>
         </div>
         <p class="newsletter__disclaimer">No spam, unsubscribe anytime.</p>
+        <p class="newsletter__status" id="newsletterStatus" role="status" aria-live="polite" aria-atomic="true"></p>
       </form>
     </div>
   </section>
@@ -477,33 +694,33 @@
         <p>Fill out the form and we'll get back to you within 24 hours to confirm availability and chat about your dog's needs.</p>
         <ul class="contact__details">
           <li>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            1234 Dogwood Ln, Austin, TX
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <a href="https://maps.google.com/?q=1234+Dogwood+Ln+Austin+TX+78701" target="_blank" rel="noopener">1234 Dogwood Ln, Austin, TX</a>
           </li>
           <li>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
-            (512) 555-0123
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+            <a href="tel:+15125550123">(512) 555-0123</a>
           </li>
           <li>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            hello@dogdadboarding.com
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <a href="mailto:hello@dogdadboarding.com">hello@dogdadboarding.com</a>
           </li>
           <li>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             Mon – Sun: 7:00am – 8:00pm
           </li>
         </ul>
         <div class="contact__social">
           <a href="https://instagram.com/dogdadboarding" aria-label="Instagram" target="_blank" rel="noopener">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
             Instagram
           </a>
           <a href="https://facebook.com/dogdadboarding" aria-label="Facebook" target="_blank" rel="noopener">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
             Facebook
           </a>
           <a href="https://tiktok.com/@dogdadboarding" aria-label="TikTok" target="_blank" rel="noopener">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.14 8.14 0 004.77 1.52V6.76a4.85 4.85 0 01-1-.07z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.14 8.14 0 004.77 1.52V6.76a4.85 4.85 0 01-1-.07z"/></svg>
             TikTok
           </a>
         </div>
@@ -524,17 +741,24 @@
             <span class="form-error" id="name-error" role="alert" aria-live="assertive"></span>
           </div>
           <div class="form-group">
+            <label for="dog-name">Dog's Name</label>
+            <input type="text" id="dog-name" name="dog_name" placeholder="Biscuit">
+            <span class="form-error" id="dog-name-error" role="alert" aria-live="assertive"></span>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
             <label for="email">Email Address</label>
             <input type="email" id="email" name="email" placeholder="jane@example.com" required autocomplete="email">
             <span class="form-error" id="email-error" role="alert" aria-live="assertive"></span>
           </div>
-        </div>
-        <div class="form-row">
           <div class="form-group">
             <label for="phone">Phone Number</label>
             <input type="tel" id="phone" name="phone" placeholder="(555) 000-0000" autocomplete="tel">
             <span class="form-error" id="phone-error" role="alert" aria-live="assertive"></span>
           </div>
+        </div>
+        <div class="form-row">
           <div class="form-group">
             <label for="service">Service Needed</label>
             <select id="service" name="service">
@@ -546,13 +770,13 @@
             </select>
             <span class="form-error" id="service-error" role="alert" aria-live="assertive"></span>
           </div>
-        </div>
-        <div class="form-row">
           <div class="form-group">
             <label for="start">Start Date</label>
             <input type="date" id="start" name="start">
             <span class="form-error" id="start-error" role="alert" aria-live="assertive"></span>
           </div>
+        </div>
+        <div class="form-row">
           <div class="form-group">
             <label for="end">End Date</label>
             <input type="date" id="end" name="end">
@@ -584,15 +808,15 @@
         <p>We proudly serve pet parents throughout the Greater Austin area, including Downtown, South Austin, East Austin, North Austin, Cedar Park, and Round Rock. Can't make it to us? Ask about our pickup and drop-off service!</p>
         <ul class="map-section__highlights">
           <li>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg width="16" height="16" stroke-width="2.5" aria-hidden="true"><use href="#icon-check-sm"/></svg>
             Free pickup &amp; drop-off within 10 miles
           </li>
           <li>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg width="16" height="16" stroke-width="2.5" aria-hidden="true"><use href="#icon-check-sm"/></svg>
             Open 7 days a week, 7am – 8pm
           </li>
           <li>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg width="16" height="16" stroke-width="2.5" aria-hidden="true"><use href="#icon-check-sm"/></svg>
             Easy drop-off &amp; pick-up scheduling
           </li>
         </ul>
@@ -609,9 +833,9 @@
         <p class="section-subtitle">Helpful advice from our team to keep your pup happy and healthy.</p>
       </div>
       <div class="resources__grid">
-        <a href="#" class="resource-card">
+        <a href="/blog/preparing-dog-boarding-stay" class="resource-card">
           <div class="resource-card__thumb">
-            <img src="https://placehold.co/400x250/40916C/FFFFFF?text=Coming+Soon" alt="Preparing Your Dog for a Boarding Stay guide" loading="lazy" decoding="async">
+            <img src="https://placehold.co/400x250/40916C/FFFFFF?text=Coming+Soon" alt="Preparing Your Dog for a Boarding Stay guide" width="400" height="250" loading="lazy" decoding="async">
           </div>
           <div class="resource-card__body">
             <span class="resource-card__tag">Travel Tips</span>
@@ -619,9 +843,9 @@
             <p>Coming soon — our guide to making drop-off day stress-free for you and your pup.</p>
           </div>
         </a>
-        <a href="#" class="resource-card">
+        <a href="/blog/seasonal-pet-care-austin" class="resource-card">
           <div class="resource-card__thumb">
-            <img src="https://placehold.co/400x250/52B788/FFFFFF?text=Coming+Soon" alt="Seasonal Pet Care Tips for Austin guide" loading="lazy" decoding="async">
+            <img src="https://placehold.co/400x250/52B788/FFFFFF?text=Coming+Soon" alt="Seasonal Pet Care Tips for Austin guide" width="400" height="250" loading="lazy" decoding="async">
           </div>
           <div class="resource-card__body">
             <span class="resource-card__tag">Health</span>
@@ -629,9 +853,9 @@
             <p>Coming soon — how to keep your dog safe and comfortable in the Texas heat.</p>
           </div>
         </a>
-        <a href="#" class="resource-card">
+        <a href="/blog/puppy-socialization-tips" class="resource-card">
           <div class="resource-card__thumb">
-            <img src="https://placehold.co/400x250/74C69D/FFFFFF?text=Coming+Soon" alt="Socialization Tips for Puppies guide" loading="lazy" decoding="async">
+            <img src="https://placehold.co/400x250/74C69D/FFFFFF?text=Coming+Soon" alt="Socialization Tips for Puppies guide" width="400" height="250" loading="lazy" decoding="async">
           </div>
           <div class="resource-card__body">
             <span class="resource-card__tag">Training</span>
@@ -678,14 +902,14 @@
       </div>
       <div class="footer__contact">
         <h4>Contact</h4>
-        <p>1234 Dogwood Ln<br>Austin, TX 78701</p>
-        <p>(512) 555-0123</p>
-        <p>hello@dogdadboarding.com</p>
+        <p><a href="https://maps.google.com/?q=1234+Dogwood+Ln+Austin+TX+78701" target="_blank" rel="noopener">1234 Dogwood Ln<br>Austin, TX 78701</a></p>
+        <p><a href="tel:+15125550123">(512) 555-0123</a></p>
+        <p><a href="mailto:hello@dogdadboarding.com">hello@dogdadboarding.com</a></p>
       </div>
     </div>
     <div class="footer__bottom">
       <div class="container footer__bottom-inner">
-            <p>© <span id="year">2025</span> Dog Dad Boarding. All rights reserved.</p>
+        <p>© <span id="year">2025</span> Dog Dad Boarding. All rights reserved.</p>
         <div class="footer__legal">
           <a href="/privacy.html">Privacy Policy</a>
           <a href="/terms.html">Terms of Service</a>
@@ -695,7 +919,7 @@
   </footer>
 
   <button class="back-to-top" id="backToTop" aria-label="Back to top">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
   </button>
 
   <!-- Sticky mobile CTA -->

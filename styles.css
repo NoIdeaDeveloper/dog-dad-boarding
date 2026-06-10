@@ -483,6 +483,7 @@ h3 { font-size: 1.375rem; }
   padding: var(--section-pad) 0;
   background: var(--bg);
   content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
 }
 
 .services__grid {
@@ -557,6 +558,7 @@ h3 { font-size: 1.375rem; }
   padding: var(--section-pad) 0;
   background: var(--bg-alt);
   content-visibility: auto;
+  contain-intrinsic-size: auto 700px;
 }
 
 .about__container {
@@ -660,6 +662,7 @@ h3 { font-size: 1.375rem; }
   padding: var(--section-pad) 0;
   background: var(--bg);
   content-visibility: auto;
+  contain-intrinsic-size: auto 700px;
 }
 
 .gallery__grid {
@@ -718,6 +721,7 @@ h3 { font-size: 1.375rem; }
   padding: var(--section-pad) 0;
   background: var(--primary);
   content-visibility: auto;
+  contain-intrinsic-size: auto 500px;
 }
 
 .testimonials .section-eyebrow { color: var(--accent-light); }
@@ -790,11 +794,12 @@ h3 { font-size: 1.375rem; }
   padding: var(--section-pad) 0;
   background: var(--bg-alt);
   content-visibility: auto;
+  contain-intrinsic-size: auto 700px;
 }
 
 .pricing__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 24px;
   align-items: start;
 }
@@ -934,6 +939,7 @@ h3 { font-size: 1.375rem; }
   padding: var(--section-pad) 0;
   background: var(--bg);
   content-visibility: auto;
+  contain-intrinsic-size: auto 800px;
 }
 
 .contact__container {
@@ -1135,6 +1141,143 @@ h3 { font-size: 1.375rem; }
 }
 
 /* =============================================
+   Testimonials — Google Reviews link
+   ============================================= */
+.testimonials__reviews-link {
+  text-align: center;
+  margin-top: 48px;
+}
+
+.testimonials__reviews-link .btn--ghost {
+  border-color: rgba(255, 255, 255, 0.4);
+  gap: 8px;
+}
+
+/* =============================================
+   Contact detail links
+   ============================================= */
+.contact__details a {
+  color: var(--text-muted);
+  transition: color var(--transition);
+}
+
+.contact__details a:hover {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* =============================================
+   How It Works
+   ============================================= */
+.how-it-works {
+  padding: var(--section-pad) 0;
+  background: var(--bg-alt);
+  content-visibility: auto;
+  contain-intrinsic-size: auto 500px;
+}
+
+.how-it-works__grid {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr;
+  gap: 0;
+  align-items: start;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.how-it-works__step {
+  text-align: center;
+  padding: 0 16px;
+}
+
+.how-it-works__number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--primary-pale);
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 0.875rem;
+  margin-bottom: 16px;
+}
+
+.how-it-works__icon {
+  width: 72px;
+  height: 72px;
+  background: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  margin: 0 auto 20px;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  border: 2px solid var(--border);
+}
+
+.how-it-works__step:hover .how-it-works__icon {
+  background: var(--primary);
+  color: var(--white);
+  border-color: var(--primary);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.how-it-works__step h3 {
+  color: var(--primary);
+  margin-bottom: 10px;
+  font-size: 1.125rem;
+}
+
+.how-it-works__step p {
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+  line-height: 1.65;
+}
+
+.how-it-works__connector {
+  align-self: center;
+  width: 48px;
+  height: 2px;
+  background: var(--border);
+  margin-top: -24px;
+  position: relative;
+}
+
+.how-it-works__connector::after {
+  content: '';
+  position: absolute;
+  right: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 7px solid var(--border);
+}
+
+.how-it-works__cta {
+  text-align: center;
+  margin-top: 52px;
+}
+
+/* =============================================
+   Footer contact links
+   ============================================= */
+.footer__contact a {
+  color: rgba(255, 255, 255, 0.65);
+  transition: color var(--transition);
+}
+
+.footer__contact a:hover {
+  color: var(--white);
+}
+
+/* =============================================
    Footer
    ============================================= */
 .footer {
@@ -1237,6 +1380,7 @@ h3 { font-size: 1.375rem; }
   padding: var(--section-pad) 0;
   background: var(--bg-alt);
   content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
 }
 
 .faq__list {
@@ -1289,15 +1433,28 @@ h3 { font-size: 1.375rem; }
   transform: rotate(45deg);
 }
 
-.faq__item p {
+/* Animated open/close via grid-template-rows */
+.faq__body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.faq__item[open] .faq__body {
+  grid-template-rows: 1fr;
+}
+
+.faq__body > p {
+  overflow: hidden;
   padding: 0 24px 18px;
   color: var(--text-muted);
   font-size: 0.9375rem;
   line-height: 1.7;
   margin: 0;
+  min-height: 0;
 }
 
-.faq__item p a {
+.faq__body > p a {
   color: var(--primary-light);
   font-weight: 500;
   text-decoration: underline;
@@ -1311,6 +1468,7 @@ h3 { font-size: 1.375rem; }
   padding: var(--section-pad) 0;
   background: var(--primary);
   content-visibility: auto;
+  contain-intrinsic-size: auto 400px;
 }
 
 .newsletter__container {
@@ -1371,6 +1529,19 @@ h3 { font-size: 1.375rem; }
   text-align: center;
 }
 
+.newsletter__status {
+  display: block;
+  text-align: center;
+  font-size: 0.875rem;
+  font-weight: 500;
+  min-height: 1.2em;
+  color: var(--accent-light);
+}
+
+.newsletter__status--error {
+  color: #fca5a5;
+}
+
 /* =============================================
     Sticky Mobile CTA
     ============================================= */
@@ -1410,6 +1581,7 @@ h3 { font-size: 1.375rem; }
   padding: var(--section-pad) 0;
   background: var(--bg);
   content-visibility: auto;
+  contain-intrinsic-size: auto 500px;
 }
 
 .map-section__container {
@@ -1480,6 +1652,7 @@ h3 { font-size: 1.375rem; }
   padding: var(--section-pad) 0;
   background: var(--bg-alt);
   content-visibility: auto;
+  contain-intrinsic-size: auto 500px;
 }
 
 .resources__grid {
@@ -1686,6 +1859,15 @@ h3 { font-size: 1.375rem; }
 }
 
 /* =============================================
+   Global focus-visible ring
+   ============================================= */
+:focus-visible {
+  outline: 3px solid var(--primary-light);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* =============================================
     Scroll Reveal Animations
     ============================================= */
 .reveal {
@@ -1700,6 +1882,13 @@ h3 { font-size: 1.375rem; }
 }
 
 /* =============================================
+   Dim star (4-star ratings)
+   ============================================= */
+.star--dim {
+  opacity: 0.3;
+}
+
+/* =============================================
    Responsive — Tablet (≤ 1024px)
    ============================================= */
 @media (max-width: 1024px) {
@@ -1709,6 +1898,14 @@ h3 { font-size: 1.375rem; }
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .pricing__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pricing-card--featured {
+    transform: none;
+  }
+
   .about__container {
     gap: 48px;
   }
@@ -1716,6 +1913,10 @@ h3 { font-size: 1.375rem; }
   .footer__container {
     grid-template-columns: 1fr 1fr;
     gap: 40px;
+  }
+
+  .how-it-works__connector {
+    width: 32px;
   }
 }
 
@@ -1912,9 +2113,23 @@ h3 { font-size: 1.375rem; }
     font-size: 0.9375rem;
   }
 
-  .faq__item p {
+  .faq__body > p {
     padding: 0 18px 14px;
     font-size: 0.875rem;
+  }
+
+  /* How It Works mobile */
+  .how-it-works__grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .how-it-works__connector {
+    display: none;
+  }
+
+  .how-it-works__step {
+    padding: 0;
   }
 
   /* Newsletter mobile */
@@ -2038,5 +2253,9 @@ h3 { font-size: 1.375rem; }
   .reveal {
     opacity: 1;
     transform: none;
+  }
+
+  .faq__body {
+    grid-template-rows: 1fr;
   }
 }
