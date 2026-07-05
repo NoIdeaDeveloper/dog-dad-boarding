@@ -165,11 +165,14 @@
         Dog Dad
       </a>
       <ul class="nav__links" id="navLinks" role="list">
-        <li><a href="#services">Services</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#gallery">Gallery</a></li>
-        <li><a href="#testimonials">Reviews</a></li>
-        <li><a href="#pricing">Pricing</a></li>
+        <li class="nav__links-header" aria-hidden="true">
+          <span class="nav__links-eyebrow">Menu</span>
+        </li>
+        <li><a href="#services"><span class="nav__links-num" aria-hidden="true">01</span>Services</a></li>
+        <li><a href="#about"><span class="nav__links-num" aria-hidden="true">02</span>About</a></li>
+        <li><a href="#gallery"><span class="nav__links-num" aria-hidden="true">03</span>Gallery</a></li>
+        <li><a href="#testimonials"><span class="nav__links-num" aria-hidden="true">04</span>Reviews</a></li>
+        <li><a href="#pricing"><span class="nav__links-num" aria-hidden="true">05</span>Pricing</a></li>
         <li><a href="#contact" class="nav__cta">Book Now</a></li>
       </ul>
       <button class="nav__hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
@@ -221,6 +224,9 @@
         </div>
       </div>
     </div>
+    <a href="#services" class="hero__scroll" aria-label="Scroll down to services">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+    </a>
   </section>
 
   <!-- Services -->
@@ -240,7 +246,7 @@
           </div>
           <h3>Overnight Boarding</h3>
           <p>Your dog sleeps in a cozy, private space with plenty of love and attention throughout the night. Just like home, but with new friends.</p>
-          <a href="#pricing" class="service-card__link">View Pricing →</a>
+          <a href="#pricing-boarding" class="service-card__link">View Pricing →</a>
         </div>
         <div class="service-card">
           <div class="service-card__icon">
@@ -250,7 +256,7 @@
           </div>
           <h3>Doggy Daycare</h3>
           <p>A full day of supervised play, socialization, and enrichment activities with other friendly dogs. Worn-out pup guaranteed.</p>
-          <a href="#pricing" class="service-card__link">View Pricing →</a>
+          <a href="#pricing-daycare" class="service-card__link">View Pricing →</a>
         </div>
         <div class="service-card">
           <div class="service-card__icon">
@@ -260,7 +266,7 @@
           </div>
           <h3>Grooming</h3>
           <p>Bath, blow dry, brush out, nail trim, and more — your pup will leave looking and smelling like the star they truly are.</p>
-          <a href="#pricing" class="service-card__link">View Pricing →</a>
+          <a href="#pricing-grooming" class="service-card__link">View Pricing →</a>
         </div>
         <div class="service-card">
           <div class="service-card__icon">
@@ -270,7 +276,7 @@
           </div>
           <h3>Dog Walking</h3>
           <p>30 or 60 minute walks with GPS tracking and a post-walk report card — complete with photos — sent straight to your phone.</p>
-          <a href="#pricing" class="service-card__link">View Pricing →</a>
+          <a href="#pricing-walking" class="service-card__link">View Pricing →</a>
         </div>
       </div>
     </div>
@@ -495,7 +501,7 @@
         <p class="section-subtitle">No hidden fees. No surprises. Just great care.</p>
       </div>
       <div class="pricing__grid">
-        <div class="pricing-card">
+        <div class="pricing-card" id="pricing-daycare">
           <div class="pricing-card__header">
             <h3>Daycare</h3>
             <div class="pricing-card__price">
@@ -521,10 +527,10 @@
               Group &amp; solo play time
             </li>
           </ul>
-          <a href="#contact" class="btn btn--outline">Book Daycare</a>
+          <a href="#contact" class="btn btn--outline" data-service="daycare">Book Daycare</a>
         </div>
 
-        <div class="pricing-card pricing-card--featured">
+        <div class="pricing-card pricing-card--featured" id="pricing-boarding">
           <div class="pricing-card__badge">Most Popular</div>
           <div class="pricing-card__header">
             <div class="pricing-card__offer">First Visit — Save 20%</div>
@@ -556,10 +562,10 @@
               Pickup &amp; drop-off available
             </li>
           </ul>
-          <a href="#contact" class="btn btn--primary">Book Boarding</a>
+          <a href="#contact" class="btn btn--primary" data-service="boarding">Book Boarding</a>
         </div>
 
-        <div class="pricing-card">
+        <div class="pricing-card" id="pricing-grooming">
           <div class="pricing-card__header">
             <h3>Grooming</h3>
             <div class="pricing-card__price">
@@ -589,10 +595,10 @@
               Bandana or bow finish
             </li>
           </ul>
-          <a href="#contact" class="btn btn--outline">Book Grooming</a>
+          <a href="#contact" class="btn btn--outline" data-service="grooming">Book Grooming</a>
         </div>
 
-        <div class="pricing-card">
+        <div class="pricing-card" id="pricing-walking">
           <div class="pricing-card__header">
             <h3>Dog Walking</h3>
             <div class="pricing-card__price">
@@ -618,7 +624,7 @@
               Photos sent to your phone
             </li>
           </ul>
-          <a href="#contact" class="btn btn--outline">Book a Walk</a>
+          <a href="#contact" class="btn btn--outline" data-service="walking">Book a Walk</a>
         </div>
       </div>
       <p class="pricing__note">Prices vary by dog size and breed. <a href="#contact">Contact us</a> for a personalized quote.</p>
@@ -734,9 +740,10 @@
         <div style="position:absolute;left:-9999px" aria-hidden="true">
           <input type="text" name="_hp" tabindex="-1" autocomplete="off">
         </div>
+        <p class="form-required-note"><span class="req" aria-hidden="true">*</span> Required fields</p>
         <div class="form-row">
           <div class="form-group">
-            <label for="name">Your Name</label>
+            <label for="name">Your Name <span class="req" aria-hidden="true">*</span></label>
             <input type="text" id="name" name="name" placeholder="Jane Smith" required autocomplete="name">
             <span class="form-error" id="name-error" role="alert" aria-live="assertive"></span>
           </div>
@@ -748,7 +755,7 @@
         </div>
         <div class="form-row">
           <div class="form-group">
-            <label for="email">Email Address</label>
+            <label for="email">Email Address <span class="req" aria-hidden="true">*</span></label>
             <input type="email" id="email" name="email" placeholder="jane@example.com" required autocomplete="email">
             <span class="form-error" id="email-error" role="alert" aria-live="assertive"></span>
           </div>
@@ -758,25 +765,23 @@
             <span class="form-error" id="phone-error" role="alert" aria-live="assertive"></span>
           </div>
         </div>
+        <div class="form-group form-group--full">
+          <label for="service">Service Needed <span class="req" aria-hidden="true">*</span></label>
+          <select id="service" name="service" required>
+            <option value="">Select a service…</option>
+            <option value="boarding">Overnight Boarding</option>
+            <option value="daycare">Doggy Daycare</option>
+            <option value="grooming">Grooming</option>
+            <option value="walking">Dog Walking</option>
+          </select>
+          <span class="form-error" id="service-error" role="alert" aria-live="assertive"></span>
+        </div>
         <div class="form-row">
-          <div class="form-group">
-            <label for="service">Service Needed</label>
-            <select id="service" name="service">
-              <option value="">Select a service…</option>
-              <option value="boarding">Overnight Boarding</option>
-              <option value="daycare">Doggy Daycare</option>
-              <option value="grooming">Grooming</option>
-              <option value="walking">Dog Walking</option>
-            </select>
-            <span class="form-error" id="service-error" role="alert" aria-live="assertive"></span>
-          </div>
           <div class="form-group">
             <label for="start">Start Date</label>
             <input type="date" id="start" name="start">
             <span class="form-error" id="start-error" role="alert" aria-live="assertive"></span>
           </div>
-        </div>
-        <div class="form-row">
           <div class="form-group">
             <label for="end">End Date</label>
             <input type="date" id="end" name="end">
@@ -788,7 +793,7 @@
           <textarea id="message" name="message" rows="4" placeholder="Breed, age, any special needs or personality quirks we should know about…"></textarea>
           <span class="form-error" id="message-error" role="alert" aria-live="assertive"></span>
         </div>
-        <button type="submit" class="btn btn--primary btn--full">Send Booking Request</button>
+        <button type="submit" class="btn btn--primary btn--full"><span class="btn__spinner" aria-hidden="true"></span><span class="btn__label">Send Booking Request</span></button>
         <p class="form-note">We'll respond within 24 hours. No spam, ever.</p>
         <div class="form-status" id="formStatus" role="status" aria-live="polite" aria-atomic="true"></div>
       </form>
@@ -885,10 +890,10 @@
       <div class="footer__links">
         <h4>Services</h4>
         <ul>
-          <li><a href="#services">Overnight Boarding</a></li>
-          <li><a href="#services">Doggy Daycare</a></li>
-          <li><a href="#services">Grooming</a></li>
-          <li><a href="#services">Dog Walking</a></li>
+          <li><a href="#pricing-boarding">Overnight Boarding</a></li>
+          <li><a href="#pricing-daycare">Doggy Daycare</a></li>
+          <li><a href="#pricing-grooming">Grooming</a></li>
+          <li><a href="#pricing-walking">Dog Walking</a></li>
         </ul>
       </div>
       <div class="footer__links">

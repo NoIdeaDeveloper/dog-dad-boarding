@@ -257,12 +257,18 @@
       });
     });
 
+    function showImage(index) {
+      currentIndex = index;
+      lightboxImg.classList.add('loading');
+      lightboxImg.src = galleryImages[currentIndex].src;
+      lightboxImg.alt = galleryImages[currentIndex].alt || '';
+    }
+
     function openLightbox(index, triggerEl) {
       if (index < 0 || index >= galleryImages.length) return;
       currentIndex    = index;
       lightboxTrigger = triggerEl || null;
-      lightboxImg.src = galleryImages[currentIndex].src;
-      lightboxImg.alt = galleryImages[currentIndex].alt || '';
+      showImage(index);
       lightbox.classList.add('open');
       document.body.style.overflow = 'hidden';
       lightbox.querySelector('.lightbox__close').focus();
@@ -272,6 +278,7 @@
       lightbox.classList.remove('open');
       document.body.style.overflow = '';
       lightboxImg.src = '';
+      lightboxImg.classList.remove('loading');
       if (lightboxTrigger) {
         lightboxTrigger.focus();
         lightboxTrigger = null;
@@ -279,9 +286,17 @@
     }
 
     function navigate(dir) {
-      currentIndex = (currentIndex + dir + galleryImages.length) % galleryImages.length;
-      lightboxImg.src = galleryImages[currentIndex].src;
-      lightboxImg.alt = galleryImages[currentIndex].alt || '';
+      showImage((currentIndex + dir + galleryImages.length) % galleryImages.length);
+    }
+
+    // Clear loading state once the high-res image finishes loading
+    if (lightboxImg) {
+      lightboxImg.addEventListener('load', function () {
+        lightboxImg.classList.remove('loading');
+      });
+      lightboxImg.addEventListener('error', function () {
+        lightboxImg.classList.remove('loading');
+      });
     }
 
     document.querySelectorAll('.gallery__item').forEach(function (item, i) {
@@ -368,6 +383,9 @@
       if (!formStatus) return;
       formStatus.textContent = message;
       formStatus.className   = 'form-status' + (type ? ' form-status--' + type : '');
+      if (message && formStatus.scrollIntoView) {
+        formStatus.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
     }
 
     var validators = {
@@ -465,8 +483,10 @@
       if (!validateForm()) return;
 
       var submitBtn   = form.querySelector('button[type="submit"]');
-      var originalText = submitBtn.textContent;
-      submitBtn.textContent = 'Sending…';
+      var label       = submitBtn.querySelector('.btn__label');
+      var originalText= label ? label.textContent : submitBtn.textContent;
+      if (submitBtn) submitBtn.classList.add('is-loading');
+      if (label) label.textContent = 'Sending…';
       submitBtn.disabled    = true;
 
       var controller = new AbortController();
@@ -493,8 +513,33 @@
           setFormStatus('Network error. Please check your connection and try again.', 'error');
         }
       }).finally(function () {
-        submitBtn.textContent = originalText;
+        if (submitBtn) submitBtn.classList.remove('is-loading');
+        if (label) label.textContent = originalText;
+        else submitBtn.textContent = originalText;
         submitBtn.disabled    = false;
+      });
+    });
+  })();
+
+  /* -------------------------------------------
+     Pricing "Book" buttons pre-select the service
+     in the contact form's Service dropdown
+  ------------------------------------------- */
+  (function () {
+    var serviceSelect = document.getElementById('service');
+    var nameInput     = document.getElementById('name');
+    if (!serviceSelect) return;
+
+    document.querySelectorAll('[data-service]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var svc = btn.getAttribute('data-service');
+        if (!svc) return;
+        // Defer until after the smooth-scroll navigation completes
+        setTimeout(function () {
+          serviceSelect.value = svc;
+          serviceSelect.dispatchEvent(new Event('change'));
+          if (nameInput) nameInput.focus();
+        }, 450);
       });
     });
   })();
