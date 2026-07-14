@@ -1230,6 +1230,13 @@ h3 { font-size: 1.375rem; }
   margin-top: 2px;
 }
 
+.form-help {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+  margin-bottom: 0;
+}
+
 .form-group.has-error input,
 .form-group.has-error select,
 .form-group.has-error textarea {
@@ -2031,6 +2038,10 @@ h3 { font-size: 1.375rem; }
 
 .lightbox.open {
   display: flex;
+}
+
+.lightbox[inert] {
+  pointer-events: none;
 }
 
 .lightbox__img {

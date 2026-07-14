@@ -482,11 +482,11 @@
   </section>
 
   <!-- Lightbox -->
-  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" aria-roledescription="carousel" inert>
     <button class="lightbox__close" aria-label="Close image viewer">&times;</button>
     <button class="lightbox__nav lightbox__nav--prev" aria-label="Previous image">&#8249;</button>
     <button class="lightbox__nav lightbox__nav--next" aria-label="Next image">&#8250;</button>
-    <img class="lightbox__img" id="lightboxImg" src="" alt="">
+    <img class="lightbox__img" id="lightboxImg" src="" alt="" aria-live="polite" aria-atomic="true">
   </div>
 
   <!-- Testimonials -->
@@ -531,10 +531,10 @@
           </div>
         </div>
       </div>
-      <div class="testimonials__reviews-link">
-        <a href="https://g.page/dogdadboarding/review" target="_blank" rel="noopener" class="btn btn--ghost">
+        <div class="testimonials__reviews-link">
+        <a href="https://search.google.com/local/writereview?placeid=YOUR_PLACE_ID" target="_blank" rel="noopener" class="btn btn--ghost">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-          Read All Our Reviews on Google
+          Leave a Review on Google
         </a>
       </div>
     </div>
@@ -980,7 +980,7 @@
           </div>
           <div class="form-group">
             <label for="phone">Phone Number</label>
-            <input type="tel" id="phone" name="phone" placeholder="(555) 000-0000" autocomplete="tel">
+            <input type="tel" id="phone" name="phone" placeholder="(512) 555-0123" autocomplete="tel" inputmode="tel">
             <span class="form-error" id="phone-error" role="alert" aria-live="assertive"></span>
           </div>
         </div>
@@ -994,6 +994,7 @@
             <option value="walking">Dog Walking</option>
           </select>
           <span class="form-error" id="service-error" role="alert" aria-live="assertive"></span>
+          <p class="form-help" id="service-help">Choose a pricing card above to pre-fill this selection.</p>
         </div>
         <div class="form-row">
           <div class="form-group">
@@ -1009,7 +1010,8 @@
         </div>
         <div class="form-group form-group--full">
           <label for="message">Tell Us About Your Dog</label>
-          <textarea id="message" name="message" rows="4" placeholder="Breed, age, any special needs or personality quirks we should know about…"></textarea>
+          <textarea id="message" name="message" rows="4" placeholder="Breed, age, any special needs or personality quirks we should know about…" aria-describedby="message-help"></textarea>
+          <p class="form-help" id="message-help">Optional, but the more you share the better we can prepare for your pup.</p>
           <span class="form-error" id="message-error" role="alert" aria-live="assertive"></span>
         </div>
         <button type="submit" class="btn btn--primary btn--full"><span class="btn__spinner" aria-hidden="true"></span><span class="btn__label">Send Booking Request</span></button>
