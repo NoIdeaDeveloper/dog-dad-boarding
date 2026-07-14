@@ -633,6 +633,177 @@
     </div>
   </section>
 
+  <!-- Train divider — a polished steam train that rolls across the rails on scroll -->
+  <div class="train-divider" aria-hidden="true">
+    <div class="train-divider__ties"></div>
+    <div class="train-divider__train">
+      <svg viewBox="0 0 360 120" width="360" height="120" focusable="false">
+        <defs>
+          <linearGradient id="tg-iron" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%"  stop-color="#3a3a42"/>
+            <stop offset="50%" stop-color="#1f1f24"/>
+            <stop offset="100%" stop-color="#0e0e12"/>
+          </linearGradient>
+          <linearGradient id="tg-iron-hi" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%"  stop-color="#5a5a64"/>
+            <stop offset="100%" stop-color="#2a2a30"/>
+          </linearGradient>
+          <linearGradient id="tg-barn" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%"  stop-color="#C26B47"/>
+            <stop offset="55%" stop-color="#A4502F"/>
+            <stop offset="100%" stop-color="#7A3A22"/>
+          </linearGradient>
+          <linearGradient id="tg-green" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%"  stop-color="#69833A"/>
+            <stop offset="55%" stop-color="#3F4E28"/>
+            <stop offset="100%" stop-color="#2E3A1C"/>
+          </linearGradient>
+          <linearGradient id="tg-gold" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%"  stop-color="#F0CC7A"/>
+            <stop offset="100%" stop-color="#C0832F"/>
+          </linearGradient>
+          <radialGradient id="tg-lamp" cx="0.4" cy="0.4" r="0.6">
+            <stop offset="0%"  stop-color="#FFF6D6"/>
+            <stop offset="60%" stop-color="#F0CC7A"/>
+            <stop offset="100%" stop-color="#8A5E22"/>
+          </radialGradient>
+          <radialGradient id="tg-window" cx="0.5" cy="0.5" r="0.7">
+            <stop offset="0%"  stop-color="#F2EAD7"/>
+            <stop offset="100%" stop-color="#C9BC92"/>
+          </radialGradient>
+        </defs>
+
+        <!-- Steam puffs (animated via .train-smoke) -->
+        <g class="train-smoke-group">
+          <circle class="train-smoke train-smoke--1" cx="28" cy="14" r="6"/>
+          <circle class="train-smoke train-smoke--2" cx="26" cy="14" r="5"/>
+          <circle class="train-smoke train-smoke--3" cx="32" cy="14" r="4.5"/>
+        </g>
+
+        <!-- ===== ENGINE ===== -->
+        <g class="train-engine">
+          <!-- Frame / chassis -->
+          <rect x="6" y="74" width="120" height="8" rx="1.5" fill="url(#tg-iron)"/>
+          <!-- Cowcatcher (pilot) -->
+          <polygon points="2,74 14,74 8,92" fill="url(#tg-iron)"/>
+          <polygon points="4,74 12,74 8,88" fill="url(#tg-iron-hi)"/>
+          <!-- Boiler (tapered cylinder, drawn as rounded rect) -->
+          <rect x="16" y="40" width="78" height="34" rx="6" fill="url(#tg-green)"/>
+          <!-- Boiler bands (gold trim rings) -->
+          <rect x="32" y="40" width="1.5" height="34" fill="url(#tg-gold)" opacity="0.8"/>
+          <rect x="58" y="40" width="1.5" height="34" fill="url(#tg-gold)" opacity="0.8"/>
+          <rect x="80" y="40" width="1.5" height="34" fill="url(#tg-gold)" opacity="0.8"/>
+          <!-- Boiler highlight (top sheen) -->
+          <rect x="18" y="42" width="74" height="3" rx="1.5" fill="#8FA84E" opacity="0.5"/>
+          <!-- Smokestack with flared lip -->
+          <rect x="20" y="24" width="9" height="20" rx="1" fill="url(#tg-iron)"/>
+          <rect x="17" y="20" width="15" height="6" rx="2" fill="url(#tg-iron-hi)"/>
+          <!-- Steam dome -->
+          <ellipse cx="46" cy="28" rx="7" ry="9" fill="url(#tg-green)"/>
+          <ellipse cx="46" cy="26" rx="7" ry="3" fill="#8FA84E" opacity="0.5"/>
+          <rect x="44" y="30" width="4" height="12" fill="url(#tg-gold)" opacity="0.7"/>
+          <!-- Bell -->
+          <rect x="60" y="28" width="2" height="6" fill="url(#tg-iron)"/>
+          <path d="M56 34 Q60 30 64 34 L63 38 L57 38 Z" fill="url(#tg-gold)"/>
+          <!-- Headlight (front lamp) -->
+          <circle cx="89" cy="46" r="4.5" fill="url(#tg-lamp)"/>
+          <circle cx="89" cy="46" r="4.5" fill="none" stroke="url(#tg-gold)" stroke-width="1"/>
+          <!-- Cab -->
+          <rect x="94" y="30" width="28" height="44" rx="2" fill="url(#tg-barn)"/>
+          <rect x="94" y="30" width="28" height="4" fill="url(#tg-iron)" opacity="0.6"/>
+          <!-- Cab window -->
+          <rect x="99" y="36" width="18" height="14" rx="1.5" fill="url(#tg-window)"/>
+          <rect x="99" y="36" width="18" height="14" rx="1.5" fill="none" stroke="#7A3A22" stroke-width="1"/>
+          <!-- Cab roof -->
+          <rect x="92" y="28" width="32" height="4" rx="1" fill="url(#tg-iron)"/>
+          <!-- Side rods connecting driving wheels -->
+          <rect x="10" y="89" width="100" height="3" rx="1.5" fill="url(#tg-iron-hi)"/>
+          <!-- Driving wheels (spoked) -->
+          <g class="train-wheel" style="transform-origin: 22px 90px;">
+            <circle cx="22" cy="90" r="9" fill="url(#tg-iron)"/>
+            <circle cx="22" cy="90" r="9" fill="none" stroke="url(#tg-iron-hi)" stroke-width="1.5"/>
+            <circle cx="22" cy="90" r="3" fill="url(#tg-iron-hi)"/>
+            <line x1="22" y1="81" x2="22" y2="99" stroke="url(#tg-iron-hi)" stroke-width="1.2"/>
+            <line x1="13" y1="90" x2="31" y2="90" stroke="url(#tg-iron-hi)" stroke-width="1.2"/>
+          </g>
+          <g class="train-wheel" style="transform-origin: 50px 90px;">
+            <circle cx="50" cy="90" r="9" fill="url(#tg-iron)"/>
+            <circle cx="50" cy="90" r="9" fill="none" stroke="url(#tg-iron-hi)" stroke-width="1.5"/>
+            <circle cx="50" cy="90" r="3" fill="url(#tg-iron-hi)"/>
+            <line x1="50" y1="81" x2="50" y2="99" stroke="url(#tg-iron-hi)" stroke-width="1.2"/>
+            <line x1="41" y1="90" x2="59" y2="90" stroke="url(#tg-iron-hi)" stroke-width="1.2"/>
+          </g>
+          <g class="train-wheel" style="transform-origin: 100px 90px;">
+            <circle cx="100" cy="90" r="9" fill="url(#tg-iron)"/>
+            <circle cx="100" cy="90" r="9" fill="none" stroke="url(#tg-iron-hi)" stroke-width="1.5"/>
+            <circle cx="100" cy="90" r="3" fill="url(#tg-iron-hi)"/>
+            <line x1="100" y1="81" x2="100" y2="99" stroke="url(#tg-iron-hi)" stroke-width="1.2"/>
+            <line x1="91" y1="90" x2="109" y2="90" stroke="url(#tg-iron-hi)" stroke-width="1.2"/>
+          </g>
+        </g>
+
+        <!-- ===== TENDER ===== -->
+        <g class="train-tender">
+          <!-- Coupler -->
+          <rect x="122" y="86" width="6" height="3" fill="url(#tg-iron)"/>
+          <!-- Tender body (coal bunker) -->
+          <rect x="128" y="44" width="48" height="30" rx="2" fill="url(#tg-iron)"/>
+          <rect x="128" y="44" width="48" height="5" fill="url(#tg-iron-hi)"/>
+          <!-- Coal pile -->
+          <path d="M132 48 Q140 44 148 48 Q156 44 164 48 L164 58 L132 58 Z" fill="#1a1a1f"/>
+          <circle cx="138" cy="50" r="2" fill="#2a2a30"/>
+          <circle cx="150" cy="49" r="2.5" fill="#2a2a30"/>
+          <circle cx="160" cy="51" r="2" fill="#2a2a30"/>
+          <!-- Tender frame -->
+          <rect x="128" y="74" width="48" height="8" rx="1.5" fill="url(#tg-iron)"/>
+          <!-- Tender wheels -->
+          <g class="train-wheel" style="transform-origin: 140px 90px;">
+            <circle cx="140" cy="90" r="7" fill="url(#tg-iron)"/>
+            <circle cx="140" cy="90" r="7" fill="none" stroke="url(#tg-iron-hi)" stroke-width="1.2"/>
+            <circle cx="140" cy="90" r="2.5" fill="url(#tg-iron-hi)"/>
+          </g>
+          <g class="train-wheel" style="transform-origin: 164px 90px;">
+            <circle cx="164" cy="90" r="7" fill="url(#tg-iron)"/>
+            <circle cx="164" cy="90" r="7" fill="none" stroke="url(#tg-iron-hi)" stroke-width="1.2"/>
+            <circle cx="164" cy="90" r="2.5" fill="url(#tg-iron-hi)"/>
+          </g>
+        </g>
+
+        <!-- ===== CABOOSE ===== -->
+        <g class="train-caboose">
+          <!-- Coupler -->
+          <rect x="176" y="86" width="6" height="3" fill="url(#tg-iron)"/>
+          <!-- Caboose body -->
+          <rect x="182" y="44" width="74" height="30" rx="2" fill="url(#tg-barn)"/>
+          <rect x="182" y="44" width="74" height="5" fill="#7A3A22" opacity="0.5"/>
+          <!-- Cupola (raised lookout) -->
+          <rect x="204" y="32" width="26" height="14" rx="2" fill="url(#tg-barn)"/>
+          <rect x="204" y="32" width="26" height="4" fill="#7A3A22" opacity="0.5"/>
+          <!-- Cupola window -->
+          <rect x="208" y="37" width="18" height="6" rx="1" fill="url(#tg-window)"/>
+          <!-- Side windows -->
+          <rect x="186" y="52" width="10" height="10" rx="1" fill="url(#tg-window)"/>
+          <rect x="240" y="52" width="10" height="10" rx="1" fill="url(#tg-window)"/>
+          <!-- Gold trim band -->
+          <rect x="182" y="66" width="74" height="2" fill="url(#tg-gold)" opacity="0.8"/>
+          <!-- Caboose frame -->
+          <rect x="182" y="74" width="74" height="8" rx="1.5" fill="url(#tg-iron)"/>
+          <!-- Caboose wheels -->
+          <g class="train-wheel" style="transform-origin: 194px 90px;">
+            <circle cx="194" cy="90" r="7" fill="url(#tg-iron)"/>
+            <circle cx="194" cy="90" r="7" fill="none" stroke="url(#tg-iron-hi)" stroke-width="1.2"/>
+            <circle cx="194" cy="90" r="2.5" fill="url(#tg-iron-hi)"/>
+          </g>
+          <g class="train-wheel" style="transform-origin: 244px 90px;">
+            <circle cx="244" cy="90" r="7" fill="url(#tg-iron)"/>
+            <circle cx="244" cy="90" r="7" fill="none" stroke="url(#tg-iron-hi)" stroke-width="1.2"/>
+            <circle cx="244" cy="90" r="2.5" fill="url(#tg-iron-hi)"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+  </div>
+
   <!-- FAQ -->
   <section class="faq" id="faq">
     <div class="container">

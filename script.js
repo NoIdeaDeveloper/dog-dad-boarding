@@ -713,4 +713,70 @@
     mapObserver.observe(mapEl);
   })();
 
+  /* -------------------------------------------
+     Train divider — scrolls the train across the rails
+     as the divider passes through the viewport.
+   ------------------------------------------- */
+  (function () {
+    var divider = document.querySelector('.train-divider');
+    if (!divider) return;
+
+    var train = divider.querySelector('.train-divider__train');
+    if (!train) return;
+
+    var rolling = false;
+    var ticking = false;
+
+    function updateTrainPos() {
+      var rect = divider.getBoundingClientRect();
+      var vh   = window.innerHeight || document.documentElement.clientHeight;
+
+      /* Progress 0 -> 1 as the divider enters the bottom of the
+         viewport and exits the top. Start the train off-screen left
+         and end it off-screen right. */
+      var start = vh;
+      var end   = -rect.height;
+      var span  = start - end;
+      var p     = (start - rect.top) / span;
+      if (p < 0) p = 0;
+      if (p > 1) p = 1;
+
+      var trainWidth = train.offsetWidth || 360;
+      var trackWidth = divider.offsetWidth || window.innerWidth;
+      var travel     = trackWidth - trainWidth + 40; /* a little overshoot */
+
+      train.style.transform = 'translateX(' + (p * travel - 20) + 'px)';
+      ticking = false;
+    }
+
+    function onScroll() {
+      if (!ticking) {
+        requestAnimationFrame(updateTrainPos);
+        ticking = true;
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    updateTrainPos();
+
+    /* Toggle the .is-rolling class (drives wheels + smoke + bob) only
+       while the divider is actually on screen. */
+    var rollObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting && !prefersReducedMotion) {
+          if (!rolling) {
+            divider.classList.add('is-rolling');
+            rolling = true;
+          }
+        } else {
+          divider.classList.remove('is-rolling');
+          rolling = false;
+        }
+      });
+    }, { threshold: 0.05 });
+
+    rollObserver.observe(divider);
+  })();
+
 })();

@@ -31,14 +31,14 @@
   /* Colors — modern farmhouse: field green, wheat gold, cream, oat, barn red */
   --primary:        #3F4E28;
   --primary-light:  #69833A;
-  --primary-pale:   #E9EDD9;
+  --primary-pale:   #DCE6CB;
   --accent:         #C0832F;
   --accent-light:   #E3B563;
   --barn:           #A4502F;
   --bg:             #FAF6EC;
   --bg-alt:         #F2EAD7;
   --text:           #2E2A20;
-  --text-muted:     #6F6755;
+  --text-muted:     #635B49;
   --white:          #FFFDF8;
   --border:         #E5DCC6;
 
@@ -146,7 +146,7 @@ h3 { font-size: 1.375rem; }
   width: 56px;
   height: 3px;
   border-radius: 2px;
-  background: var(--accent-light);
+  background: var(--accent);
   margin: 18px auto 0;
 }
 
@@ -323,6 +323,11 @@ h3 { font-size: 1.375rem; }
   font-weight: 500;
   color: rgba(255, 255, 255, 0.88);
   transition: var(--transition);
+}
+
+/* Hide index numbers on desktop; shown only in mobile menu */
+.nav__links-num {
+  display: none;
 }
 
 .nav.scrolled .nav__links a {
@@ -969,7 +974,7 @@ h3 { font-size: 1.375rem; }
 
 .pricing-card__offer {
   display: inline-block;
-  background: var(--barn);
+  background: var(--accent);
   color: var(--white);
   padding: 4px 16px;
   border-radius: 100px;
@@ -2001,6 +2006,140 @@ h3 { font-size: 1.375rem; }
 }
 
 /* =============================================
+   Train Divider
+   A polished steam train (engine + tender + caboose) that travels
+   left-to-right across the rails as the user scrolls the divider
+   into view. Wheels spin and steam rises while in view.
+   ============================================= */
+.train-divider {
+  position: relative;
+  background: var(--bg-alt);
+  padding: 0;
+  height: 110px;
+  overflow: hidden;
+}
+
+/* Rails — two parallel lines; the rail line (where wheels sit) is at 60px */
+.train-divider::before,
+.train-divider::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--border);
+  z-index: 0;
+}
+
+.train-divider::before { top: 56px; }
+.train-divider::after  { top: 64px; }
+
+/* Sleepers (railroad ties) — subtle repeating dashes between the rails */
+.train-divider__ties {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 56px;
+  height: 12px;
+  z-index: 0;
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--border) 0,
+    var(--border) 18px,
+    transparent 18px,
+    transparent 42px
+  );
+  opacity: 0.5;
+}
+
+/* Train — wheel centers at SVG y=90; rail line at 60px from divider top.
+   So the SVG top sits at 60 - 90 = -30px. */
+.train-divider__train {
+  position: absolute;
+  z-index: 1;
+  top: -30px;
+  left: 0;
+  width: 360px;
+  height: 120px;
+  will-change: transform;
+  transform: translateX(-30px);
+}
+
+.train-divider__train svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  /* Flip horizontally so the locomotive faces right (direction of travel) */
+  transform: scaleX(-1);
+  filter: drop-shadow(0 3px 3px rgba(74, 60, 30, 0.15));
+}
+
+/* Wheels — spin via CSS animation while train is in view.
+   transform-box: view-box lets inline transform-origin use SVG coords. */
+.train-wheel {
+  transform-box: view-box;
+}
+
+.train-divider.is-rolling .train-wheel {
+  animation: trainWheelSpin 0.45s linear infinite;
+}
+
+/* Counter-clockwise in SVG space; the scaleX(-1) flip on the SVG
+   makes it read as clockwise (forward) on screen. */
+@keyframes trainWheelSpin {
+  to { transform: rotate(-360deg); }
+}
+
+/* Steam puffs — rise + fade while train is in view */
+.train-smoke {
+  fill: var(--text-muted);
+  opacity: 0;
+}
+
+.train-divider.is-rolling .train-smoke {
+  animation: trainSmoke 2s ease-out infinite;
+}
+
+.train-divider .train-smoke--1 { animation-delay: 0s; }
+.train-divider .train-smoke--2 { animation-delay: 0.66s; }
+.train-divider .train-smoke--3 { animation-delay: 1.33s; }
+
+@keyframes trainSmoke {
+  0%   { opacity: 0; transform: translate(0, 0) scale(0.5); }
+  15%  { opacity: 0.4; }
+  /* +6px in SVG space becomes -6px (leftward, trailing) on screen after flip */
+  100% { opacity: 0; transform: translate(6px, -28px) scale(1.6); }
+}
+
+/* Subtle bobbing of the whole train — reads as motion over uneven rail */
+.train-divider.is-rolling .train-divider__train {
+  animation: trainBob 0.45s ease-in-out infinite;
+}
+
+@keyframes trainBob {
+  0%, 100% { translate: 0 0; }
+  50%      { translate: 0 -1.5px; }
+}
+
+/* Respect reduced motion: stop the animation, show a static train */
+@media (prefers-reduced-motion: reduce) {
+  .train-divider.is-rolling .train-wheel,
+  .train-divider.is-rolling .train-smoke,
+  .train-divider.is-rolling .train-divider__train {
+    animation: none;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .train-divider { height: 90px; }
+  .train-divider::before { top: 46px; }
+  .train-divider::after  { top: 54px; }
+  .train-divider__ties   { top: 46px; }
+  .train-divider__train  { width: 270px; height: 90px; top: -24px; }
+}
+
+/* =============================================
    Global focus-visible ring
    ============================================= */
 :focus-visible {
@@ -2182,8 +2321,15 @@ h3 { font-size: 1.375rem; }
     transform: translateY(-50%);
   }
 
+  /* Mobile menu always uses dark-theme active styling, regardless of scroll */
+  .nav.scrolled .nav__links a.active:not(.nav__cta) {
+    color: var(--white) !important;
+    background: transparent;
+  }
+
   /* Faint index numbers */
   .nav__links-num {
+    display: block;
     font-family: var(--font-body);
     font-size: 0.8125rem;
     font-weight: 600;
