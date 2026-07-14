@@ -340,6 +340,68 @@
   })();
 
   /* -------------------------------------------
+     FAQ: accessible disclosure widgets with
+     smooth close animation and focus management
+  ------------------------------------------- */
+  (function () {
+    var detailsList = document.querySelectorAll('.faq__item');
+    if (!detailsList.length) return;
+
+    function setSummaryAria(details, summary, isOpen) {
+      summary.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      var body = details.querySelector('.faq__body');
+      if (body) body.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+    }
+
+    detailsList.forEach(function (details) {
+      var summary = details.querySelector('summary');
+      if (!summary) return;
+
+      // Match initial state (HTML may set [open] on load)
+      setSummaryAria(details, summary, details.open);
+
+      // Space/Enter are handled by the browser for <summary> clicks;
+      // we add Escape to close the currently open item.
+      details.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && details.open) {
+          e.preventDefault();
+          details.classList.add('is-closing');
+          setTimeout(function () {
+            details.open = false;
+            details.classList.remove('is-closing');
+            setSummaryAria(details, summary, false);
+            summary.focus();
+          }, 300);
+        }
+      });
+
+      summary.addEventListener('click', function (e) {
+        e.preventDefault();
+        var isOpen = details.open;
+
+        if (isOpen) {
+          details.classList.add('is-closing');
+          // Let the CSS grid transition run before removing [open].
+          setTimeout(function () {
+            details.open = false;
+            details.classList.remove('is-closing');
+            setSummaryAria(details, summary, false);
+          }, 300);
+        } else {
+          details.open = true;
+          setSummaryAria(details, summary, true);
+          summary.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      });
+
+      // Keep ARIA in sync if the user toggles via built-in details behavior
+      details.addEventListener('toggle', function () {
+        setSummaryAria(details, summary, details.open);
+      });
+    });
+  })();
+
+  /* -------------------------------------------
      Scroll-reveal animations
   ------------------------------------------- */
   (function () {
