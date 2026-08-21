@@ -357,6 +357,11 @@ h3 { font-size: 1.375rem; }
   color: var(--primary);
 }
 
+/* Mobile-only "Menu" eyebrow header — hidden on desktop, shown in the mobile menu panel */
+.nav__links-header {
+  display: none;
+}
+
 .nav__links {
   display: flex;
   align-items: center;
@@ -579,6 +584,18 @@ h3 { font-size: 1.375rem; }
   gap: 14px;
   flex-wrap: wrap;
   margin-bottom: 72px;
+}
+
+/* Primary CTA over the dark hero photo: wheat-gold pops more than green-on-green */
+.hero__actions .btn--primary {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.hero__actions .btn--primary:hover {
+  background: var(--accent-light);
+  border-color: var(--accent-light);
+  box-shadow: 0 8px 28px rgba(192, 131, 47, 0.45);
 }
 
 .hero__trust {
@@ -2569,6 +2586,7 @@ a.resource-card:hover .resource-card__thumb img {
 
   /* Branded header inside the menu panel */
   .nav__links-header {
+    display: block;
     text-align: left;
     padding: 0 0 28px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);

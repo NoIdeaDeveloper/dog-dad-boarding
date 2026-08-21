@@ -14,7 +14,7 @@ This file tracks placeholder values and assets that still need to be replaced wi
 | Gallery photo 4 | `Photo 4` placeholders (`400x400` thumb + `800x800` full) | Real grooming photo | Square aspect ratio. |
 | Gallery photo 5 | `Photo 5` placeholders (`400x400` thumb + `800x800` full) | Real happy-dog portrait | Square aspect ratio. |
 | Gallery photo 6 | `Photo 6` placeholders (`800x450` thumb + `1200x675` full) | Real group-play / yard photo | Wide 16:9 ratio. |
-| Resource thumbnails (3) | `https://placehold.co/400x250/...?text=Coming+Soon` | Real blog/guide thumbnails | 400×250 or 8:5 ratio. Blog posts can be created later; for now these still point to `/blog/…` URLs that will 404 until the posts exist. |
+| Resource thumbnails (3) | `https://placehold.co/400x250/...?text=Coming+Soon` | Real blog/guide thumbnails | 400×250 or 8:5 ratio. Cards are intentionally **non-link `<article>` teasers** with a "Coming Soon" badge until posts exist — restore `<a href="/blog/…"` wrappers (and remove the `resource-card--soon` class + badge span) when the posts are written. |
 | Testimonial avatars | `https://placehold.co/48x48/...` initials | Real customer photos (or keep initials) | Optional. If using real photos, keep them 48×48 or larger with square crop. |
 | OG / social image | `https://dogdadboarding.com/og-image.jpg` | Real 1200×630 Open Graph image | Must be hosted at that exact path or update `og:image`, `twitter:image` (add if desired), and structured data `image` in `index.html`. |
 
@@ -30,8 +30,9 @@ This file tracks placeholder values and assets that still need to be replaced wi
 | Item | Current value | Required action |
 |------|---------------|-----------------|
 | Google review CTA | `https://search.google.com/local/writereview?placeid=YOUR_PLACE_ID` | Replace `YOUR_PLACE_ID` with your real Google Business Profile Place ID. |
+| Hero trust badges | `Max 8 / 24/7 / 7` placeholders | Swap in real stats when known (e.g. dogs cared for, star rating). If you add a rating, also add back an honest `aggregateRating` block to the JSON-LD — never ship placeholder review counts there (Google penalizes fabricated ratings). |
 | Social links | `https://instagram.com/dogdadboarding`, `https://facebook.com/dogdadboarding`, `https://tiktok.com/@dogdadboarding` | Verify or replace with your real social URLs. Also update `sameAs` in the LocalBusiness structured data. |
-| Blog/resource links | `/blog/preparing-dog-boarding-stay`, `/blog/seasonal-pet-care-austin`, `/blog/puppy-socialization-tips` | Create these pages or remove/update the resource cards in `index.html` before launch to avoid 404s. |
+| Blog posts to write | `/blog/preparing-dog-boarding-stay`, `/blog/seasonal-pet-care-austin`, `/blog/puppy-socialization-tips` | Resource cards are non-link teasers for now, so nothing 404s. Write these posts at any point, then re-link the cards. |
 
 ## Fonts
 
