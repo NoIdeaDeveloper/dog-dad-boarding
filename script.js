@@ -772,6 +772,9 @@
         .addTo(map)
         .bindPopup('<strong>Dog Dad Boarding</strong><br>Austin, TX')
         .openPopup();
+
+      /* Hide the static fallback message once tiles are live */
+      mapEl.classList.add('map-loaded');
     }
 
     function loadLeaflet() {
@@ -789,6 +792,10 @@
       script.integrity   = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=';
       script.crossOrigin = 'anonymous';
       script.onload      = initMap;
+      script.onerror     = function () {
+        /* CDN unreachable — swap the loading message for a static summary */
+        mapEl.classList.add('map-unavailable');
+      };
       document.head.appendChild(script);
     }
 
@@ -806,25 +813,25 @@
   })();
 
   /* -------------------------------------------
-     Train divider — scrolls the train across the rails
+     Dog divider — the pup trots along the fence
      as the divider passes through the viewport.
    ------------------------------------------- */
   (function () {
-    var divider = document.querySelector('.train-divider');
+    var divider = document.querySelector('.dog-divider');
     if (!divider) return;
 
-    var train = divider.querySelector('.train-divider__train');
-    if (!train) return;
+    var dog = divider.querySelector('.dog-divider__dog');
+    if (!dog) return;
 
-    var rolling = false;
-    var ticking = false;
+    var trotting = false;
+    var ticking  = false;
 
-    function updateTrainPos() {
+    function updateDogPos() {
       var rect = divider.getBoundingClientRect();
       var vh   = window.innerHeight || document.documentElement.clientHeight;
 
       /* Progress 0 -> 1 as the divider enters the bottom of the
-         viewport and exits the top. Start the train off-screen left
+         viewport and exits the top. Start the pup off-screen left
          and end it off-screen right. */
       var start = vh;
       var end   = -rect.height;
@@ -833,42 +840,42 @@
       if (p < 0) p = 0;
       if (p > 1) p = 1;
 
-      var trainWidth = train.offsetWidth || 360;
+      var dogWidth   = dog.offsetWidth || 200;
       var trackWidth = divider.offsetWidth || window.innerWidth;
-      var travel     = trackWidth - trainWidth + 40; /* a little overshoot */
+      var travel     = trackWidth - dogWidth + 40; /* a little overshoot */
 
-      train.style.transform = 'translateX(' + (p * travel - 20) + 'px)';
+      dog.style.transform = 'translateX(' + (p * travel - 20) + 'px)';
       ticking = false;
     }
 
     function onScroll() {
       if (!ticking) {
-        requestAnimationFrame(updateTrainPos);
+        requestAnimationFrame(updateDogPos);
         ticking = true;
       }
     }
 
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll, { passive: true });
-    updateTrainPos();
+    updateDogPos();
 
-    /* Toggle the .is-rolling class (drives wheels + smoke + bob) only
+    /* Toggle the .is-trotting class (drives legs + tail + bob) only
        while the divider is actually on screen. */
-    var rollObserver = new IntersectionObserver(function (entries) {
+    var trotObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting && !prefersReducedMotion) {
-          if (!rolling) {
-            divider.classList.add('is-rolling');
-            rolling = true;
+          if (!trotting) {
+            divider.classList.add('is-trotting');
+            trotting = true;
           }
         } else {
-          divider.classList.remove('is-rolling');
-          rolling = false;
+          divider.classList.remove('is-trotting');
+          trotting = false;
         }
       });
     }, { threshold: 0.05 });
 
-    rollObserver.observe(divider);
+    trotObserver.observe(divider);
   })();
 
 })();

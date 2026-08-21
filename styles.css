@@ -98,6 +98,22 @@ button { font-family: inherit; }
   color: var(--white);
 }
 
+/* On dark-green sections the green selection disappears — use wheat gold */
+.hero ::selection,
+.testimonials ::selection,
+.newsletter ::selection,
+.footer ::selection {
+  background: var(--accent-light);
+  color: var(--primary);
+}
+.hero ::-moz-selection,
+.testimonials ::-moz-selection,
+.newsletter ::-moz-selection,
+.footer ::-moz-selection {
+  background: var(--accent-light);
+  color: var(--primary);
+}
+
 /* === Typography === */
 h1, h2, h3, h4 {
   font-family: var(--font-display);
@@ -273,6 +289,26 @@ h3 { font-size: 1.375rem; }
   transition: background var(--transition), backdrop-filter var(--transition);
   z-index: -1;
   pointer-events: none;
+}
+
+/* Subtle scrim behind nav links before scroll so white text stays readable
+   even if the hero photo underneath is bright. */
+.nav::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 140%;
+  z-index: -2;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0));
+  opacity: 1;
+  transition: opacity var(--transition);
+}
+
+.nav.scrolled::after {
+  opacity: 0;
 }
 
 .nav.scrolled {
@@ -611,6 +647,11 @@ h3 { font-size: 1.375rem; }
   50%      { transform: translateX(-50%) translateY(6px); }
 }
 
+/* Short-viewport guard: hide the scroll indicator so it never overlaps content */
+@media (max-height: 560px) {
+  .hero__scroll { display: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero__scroll { animation: none; }
 }
@@ -811,6 +852,7 @@ h3 { font-size: 1.375rem; }
 }
 
 .gallery__item {
+  position: relative;
   border-radius: var(--radius-sm);
   overflow: hidden;
   aspect-ratio: 1;
@@ -837,6 +879,35 @@ h3 { font-size: 1.375rem; }
 .gallery__item:focus-visible {
   outline: 3px solid var(--primary-light);
   outline-offset: 2px;
+}
+
+.gallery__expand {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(46, 42, 32, 0.55);
+  color: var(--white);
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity var(--transition), transform var(--transition);
+  pointer-events: none;
+}
+
+.gallery__item:hover .gallery__expand,
+.gallery__item:focus-visible .gallery__expand {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Touch devices have no hover — keep the affordance always visible */
+@media (hover: none) {
+  .gallery__expand { opacity: 1; transform: scale(1); }
 }
 
 .gallery__cta {
@@ -941,6 +1012,11 @@ h3 { font-size: 1.375rem; }
   grid-template-columns: repeat(4, 1fr);
   gap: 24px;
   align-items: start;
+  padding-top: 18px; /* room for the featured card's "Most Popular" badge */
+}
+
+.pricing-card {
+  scroll-margin-top: calc(var(--nav-height) + 40px);
 }
 
 .pricing-card {
@@ -1221,6 +1297,70 @@ h3 { font-size: 1.375rem; }
 .form-group textarea {
   resize: vertical;
   min-height: 110px;
+}
+
+/* Radio pills — preferred contact method */
+.form-legend {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text);
+  padding: 0;
+  margin-bottom: 8px;
+}
+
+.form-radio-group {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.form-radio {
+  position: relative;
+  cursor: pointer;
+}
+
+.form-radio input {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  cursor: pointer;
+}
+
+.form-radio span {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 18px;
+  border: 1.5px solid var(--border);
+  border-radius: 100px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--bg);
+  transition: var(--transition);
+}
+
+.form-radio input:checked + span {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--white);
+}
+
+.form-radio input:focus-visible + span {
+  outline: 3px solid var(--primary-light);
+  outline-offset: 2px;
+}
+
+.form-radio:hover span {
+  border-color: var(--primary-light);
+}
+
+fieldset.form-group {
+  border: none;
+  padding: 0;
+  margin: 0 0 24px;
+  min-width: 0;
 }
 
 .form-error {
@@ -1861,6 +2001,31 @@ h3 { font-size: 1.375rem; }
   background: var(--bg-alt);
 }
 
+/* Static fallback shown until Leaflet finishes loading — or indefinitely
+   if the CDN is unreachable. Cleared once the map initializes. */
+.map-section__embed #map::before {
+  content: 'Serving the Greater Austin area — interactive map loading…';
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 24px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+  background:
+    radial-gradient(circle at 50% 40%, var(--primary-pale) 0%, transparent 55%),
+    var(--bg-alt);
+}
+
+.map-section__embed #map.map-loaded::before {
+  content: none;
+}
+
+.map-section__embed #map.map-unavailable::before {
+  content: 'Downtown Austin, TX — pickup & drop-off available across the Greater Austin area.';
+}
+
 .map-section__info h3 {
   color: var(--primary);
   margin-bottom: 16px;
@@ -1928,9 +2093,28 @@ h3 { font-size: 1.375rem; }
   display: block;
 }
 
-.resource-card:hover {
+a.resource-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
+}
+
+/* Non-link "Coming soon" cards stay static — no affordances of a link */
+.resource-card--soon {
+  cursor: default;
+}
+
+.resource-card__soon {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 10px;
+  border-radius: 100px;
+  background: var(--primary-pale);
+  color: var(--primary);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  vertical-align: 2px;
 }
 
 .resource-card__thumb {
@@ -1945,7 +2129,7 @@ h3 { font-size: 1.375rem; }
   transition: transform 0.5s ease;
 }
 
-.resource-card:hover .resource-card__thumb img {
+a.resource-card:hover .resource-card__thumb img {
   transform: scale(1.05);
 }
 
@@ -2127,137 +2311,149 @@ h3 { font-size: 1.375rem; }
 }
 
 /* =============================================
-   Train Divider
-   A polished steam train (engine + tender + caboose) that travels
-   left-to-right across the rails as the user scrolls the divider
-   into view. Wheels spin and steam rises while in view.
+   Dog Divider
+   An eager pup trots left-to-right along a fence line
+   as the divider passes through the viewport.
+   Legs, tail, and head animate while in view.
    ============================================= */
-.train-divider {
+.dog-divider {
   position: relative;
   background: var(--bg-alt);
   padding: 0;
-  height: 110px;
+  height: 104px;
   overflow: hidden;
 }
 
-/* Rails — two parallel lines; the rail line (where wheels sit) is at 60px */
-.train-divider::before,
-.train-divider::after {
+/* Ground line under the pup's paws */
+.dog-divider::after {
   content: '';
   position: absolute;
   left: 0;
   right: 0;
+  bottom: 22px;
   height: 2px;
   background: var(--border);
   z-index: 0;
 }
 
-.train-divider::before { top: 56px; }
-.train-divider::after  { top: 64px; }
-
-/* Sleepers (railroad ties) — subtle repeating dashes between the rails */
-.train-divider__ties {
+/* Picket fence — repeating slat pattern, faded into the background */
+.dog-divider__fence {
   position: absolute;
   left: 0;
   right: 0;
-  top: 56px;
-  height: 12px;
+  top: 34px;
+  height: 26px;
   z-index: 0;
   background-image: repeating-linear-gradient(
     to right,
     var(--border) 0,
-    var(--border) 18px,
-    transparent 18px,
-    transparent 42px
+    var(--border) 8px,
+    transparent 8px,
+    transparent 34px
   );
-  opacity: 0.5;
+  background-size: 100% 22px;
+  background-repeat: repeat-x;
+  background-position: 0 0;
+  border-bottom: 2px solid var(--border);
+  border-top: 2px solid var(--border);
+  opacity: 0.55;
 }
 
-/* Train — wheel centers at SVG y=90; rail line at 60px from divider top.
-   So the SVG top sits at 60 - 90 = -30px. */
-.train-divider__train {
+/* Dog — paws at SVG y≈112; ground line is 22px up from the divider bottom,
+   i.e. 82px from the top. So the SVG top sits at 82 - 112 ≈ -30px. */
+.dog-divider__dog {
   position: absolute;
   z-index: 1;
   top: -30px;
   left: 0;
-  width: 360px;
+  width: 200px;
   height: 120px;
   will-change: transform;
-  transform: translateX(-30px);
+  transform: translateX(-220px);
 }
 
-.train-divider__train svg {
+.dog-divider__dog svg {
   display: block;
   width: 100%;
   height: 100%;
-  /* Flip horizontally so the locomotive faces right (direction of travel) */
-  transform: scaleX(-1);
-  filter: drop-shadow(0 3px 3px rgba(74, 60, 30, 0.15));
+  filter: drop-shadow(0 3px 2px rgba(74, 60, 30, 0.18));
 }
 
-/* Wheels — spin via CSS animation while train is in view.
-   transform-box: view-box lets inline transform-origin use SVG coords. */
-.train-wheel {
-  transform-box: view-box;
+/* Trot cycle — alternating leg lifts while the divider is in view.
+   transform-box: fill-box so origins track each leg's own shape. */
+.dog-leg,
+.dog-tail,
+.dog-head {
+  transform-box: fill-box;
 }
 
-.train-divider.is-rolling .train-wheel {
-  animation: trainWheelSpin 0.45s linear infinite;
+.dog-leg--back  { transform-origin: 50% 0%; }
+.dog-leg--front { transform-origin: 50% 0%; }
+.dog-tail       { transform-origin: 100% 50%; }
+.dog-head       { transform-origin: 10% 85%; }
+
+.dog-divider.is-trotting .dog-leg--back {
+  animation: dogLegBack 0.5s ease-in-out infinite;
 }
 
-/* Counter-clockwise in SVG space; the scaleX(-1) flip on the SVG
-   makes it read as clockwise (forward) on screen. */
-@keyframes trainWheelSpin {
-  to { transform: rotate(-360deg); }
+.dog-divider.is-trotting .dog-leg--front {
+  animation: dogLegFront 0.5s ease-in-out infinite;
 }
 
-/* Steam puffs — rise + fade while train is in view */
-.train-smoke {
-  fill: var(--text-muted);
-  opacity: 0;
+@keyframes dogLegBack {
+  0%, 100% { transform: rotate(12deg); }
+  50%      { transform: rotate(-14deg); }
 }
 
-.train-divider.is-rolling .train-smoke {
-  animation: trainSmoke 2s ease-out infinite;
+@keyframes dogLegFront {
+  0%, 100% { transform: rotate(-14deg); }
+  50%      { transform: rotate(12deg); }
 }
 
-.train-divider .train-smoke--1 { animation-delay: 0s; }
-.train-divider .train-smoke--2 { animation-delay: 0.66s; }
-.train-divider .train-smoke--3 { animation-delay: 1.33s; }
-
-@keyframes trainSmoke {
-  0%   { opacity: 0; transform: translate(0, 0) scale(0.5); }
-  15%  { opacity: 0.4; }
-  /* +6px in SVG space becomes -6px (leftward, trailing) on screen after flip */
-  100% { opacity: 0; transform: translate(6px, -28px) scale(1.6); }
+.dog-divider.is-trotting .dog-tail {
+  animation: dogTailWag 0.5s ease-in-out infinite;
 }
 
-/* Subtle bobbing of the whole train — reads as motion over uneven rail */
-.train-divider.is-rolling .train-divider__train {
-  animation: trainBob 0.45s ease-in-out infinite;
+@keyframes dogTailWag {
+  0%, 100% { transform: rotate(-8deg); }
+  50%      { transform: rotate(10deg); }
 }
 
-@keyframes trainBob {
+.dog-divider.is-trotting .dog-head {
+  animation: dogHeadBob 0.5s ease-in-out infinite;
+}
+
+@keyframes dogHeadBob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(1.5px); }
+}
+
+/* Whole-body bob — reads as trot suspension */
+.dog-divider.is-trotting .dog-divider__dog {
+  animation: dogBodyBob 0.5s ease-in-out infinite;
+}
+
+@keyframes dogBodyBob {
   0%, 100% { translate: 0 0; }
-  50%      { translate: 0 -1.5px; }
+  50%      { translate: 0 -2px; }
 }
 
-/* Respect reduced motion: stop the animation, show a static train */
+/* Respect reduced motion: park the pup mid-scene, no animation */
 @media (prefers-reduced-motion: reduce) {
-  .train-divider.is-rolling .train-wheel,
-  .train-divider.is-rolling .train-smoke,
-  .train-divider.is-rolling .train-divider__train {
+  .dog-divider.is-trotting .dog-leg,
+  .dog-divider.is-trotting .dog-tail,
+  .dog-divider.is-trotting .dog-head,
+  .dog-divider.is-trotting .dog-divider__dog {
     animation: none;
   }
 }
 
 /* Mobile */
 @media (max-width: 480px) {
-  .train-divider { height: 90px; }
-  .train-divider::before { top: 46px; }
-  .train-divider::after  { top: 54px; }
-  .train-divider__ties   { top: 46px; }
-  .train-divider__train  { width: 270px; height: 90px; top: -24px; }
+  .dog-divider { height: 88px; }
+  .dog-divider::after { bottom: 18px; }
+  .dog-divider__fence { top: 28px; height: 22px; }
+  .dog-divider__dog  { width: 150px; height: 90px; top: -19px; }
 }
 
 /* =============================================
@@ -2287,7 +2483,8 @@ h3 { font-size: 1.375rem; }
    Dim star (4-star ratings)
    ============================================= */
 .star--dim {
-  opacity: 0.3;
+  opacity: 0.35;
+  filter: grayscale(45%);
 }
 
 /* =============================================
@@ -2879,10 +3076,9 @@ h3 { font-size: 1.375rem; }
   .faq__body { display: block !important; }
   .faq__item summary::after { display: none; }
 
-  /* Append the destination URL after each hyperlink */
-  a[href^="http"]::after,
-  a[href^="mailto"]::after,
-  a[href^="tel"]::after {
+  /* Append the destination URL after external links — but not tel:/mailto:
+     the visible text already shows the number/address. */
+  a[href^="http"]::after {
     content: ' (' attr(href) ')';
     font-size: 0.85em;
     color: #555;
